@@ -353,99 +353,89 @@
     <!-- ============================================================
     SECTION 3: TOOLS (الأدوات)
     ============================================================ -->
-    <section class="py-5" id="tools">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <span class="badge bg-danger mb-2">أدوات الاختراق</span>
-                <h2 class="display-5 fw-bold">🧰 أدوات Kali Linux</h2>
-                <p class="text-muted">أشهر الأدوات المستخدمة في اختبار الاختراق</p>
+<section class="py-5" id="tools">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-danger mb-2">أدوات الاختراق</span>
+            <h2 class="display-5 fw-bold">🧰 أدوات <span class="text-danger">Kali Linux</span></h2>
+            <p class="text-muted">أشهر الأدوات المستخدمة في اختبار الاختراق</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Nmap -->
+            <div class="col-md-3 col-6" data-aos="zoom-in">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-network-wired" style="font-size:3rem;color:#0ea5e9;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Nmap</h6>
+                    <small class="text-muted">مسح الشبكات</small>
+                </div>
             </div>
 
-            <div class="row g-4">
-                <!-- Nmap -->
-                <div class="col-md-3 col-6" data-aos="zoom-in">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/nmap-logo.png" alt="Nmap" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Nmap</h6>
-                            <small class="text-muted">مسح الشبكات</small>
-                        </div>
-                    </div>
+            <!-- Wireshark -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="50">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-eye" style="font-size:3rem;color:#22c55e;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Wireshark</h6>
+                    <small class="text-muted">تحليل الحزم</small>
                 </div>
-                <!-- Wireshark -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/wireshark-logo.png" alt="Wireshark" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Wireshark</h6>
-                            <small class="text-muted">تحليل الحزم</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- Metasploit -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-bolt" style="font-size:3rem;color:#a855f7;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Metasploit</h6>
+                    <small class="text-muted">استغلال الثغرات</small>
                 </div>
-                <!-- Metasploit -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/metasploit-logo.png" alt="Metasploit" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Metasploit</h6>
-                            <small class="text-muted">استغلال الثغرات</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- Burp Suite -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-fire" style="font-size:3rem;color:#f59e0b;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Burp Suite</h6>
+                    <small class="text-muted">اختبار تطبيقات الويب</small>
                 </div>
-                <!-- Burp Suite -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/burp-logo.png" alt="Burp Suite" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Burp Suite</h6>
-                            <small class="text-muted">اختبار تطبيقات الويب</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- Hydra -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-key" style="font-size:3rem;color:#ef4444;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Hydra</h6>
+                    <small class="text-muted">تخمين كلمات المرور</small>
                 </div>
-                <!-- Hydra -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/hydra-logo.png" alt="Hydra" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Hydra</h6>
-                            <small class="text-muted">تخمين كلمات المرور</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- SQLMap -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-database" style="font-size:3rem;color:#0d6efd;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">SQLMap</h6>
+                    <small class="text-muted">حقن SQL</small>
                 </div>
-                <!-- SQLMap -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/sqlmap-logo.png" alt="SQLMap" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">SQLMap</h6>
-                            <small class="text-muted">حقن SQL</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- John the Ripper -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-user-secret" style="font-size:3rem;color:#64748b;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">John the Ripper</h6>
+                    <small class="text-muted">كسر التشفير</small>
                 </div>
-                <!-- John -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/john-logo.png" alt="John" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">John the Ripper</h6>
-                            <small class="text-muted">كسر التشفير</small>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hashcat -->
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="card border-0 shadow-sm h-100 text-center">
-                        <div class="card-body p-3">
-                            <img src="images/hashcat-logo.png" alt="Hashcat" class="img-fluid mb-2" style="height:50px;" />
-                            <h6 class="fw-bold">Hashcat</h6>
-                            <small class="text-muted">كسر التشفير (GPU)</small>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- Hashcat -->
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="350">
+                <div class="card h-100 text-center p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;">
+                    <i class="fas fa-microchip" style="font-size:3rem;color:#fbbf24;margin-bottom:10px;display:block;"></i>
+                    <h6 class="fw-bold" style="color:var(--text-primary);">Hashcat</h6>
+                    <small class="text-muted">كسر التشفير (GPU)</small>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- ============================================================
     SECTION 4: ATTACK TYPES & DEFENSES
     ============================================================ -->
