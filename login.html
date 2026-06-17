@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول - أكاديمية أحمد الحداد</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1a0a2a 50%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* ===== PARTICLES BACKGROUND ===== */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 193, 7, 0.1);
+            animation: float linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* ===== LOGIN CARD ===== */
+        .login-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 450px;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .login-card:hover {
+            border-color: rgba(255, 193, 7, 0.3);
+            box-shadow: 0 30px 80px rgba(255, 193, 7, 0.05);
+        }
+
+        /* ===== LOGO ===== */
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-logo .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffc107, #f59e0b);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.3);
+            transition: all 0.3s ease;
+        }
+        .login-logo .icon:hover {
+            transform: scale(1.05) rotate(-5deg);
+            box-shadow: 0 15px 50px rgba(255, 193, 7, 0.4);
+        }
+        .login-logo h3 {
+            color: white;
+            font-weight: 700;
+        }
+        .login-logo h3 span {
+            color: #ffc107;
+        }
+        .login-logo p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .form-group .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-group .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 14px 45px 14px 20px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            height: 55px;
+        }
+        .form-group .form-control:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .form-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .form-group .form-control:focus + .input-icon,
+        .form-group .form-control:focus ~ .input-icon {
+            color: #ffc107;
+        }
+
+        /* ===== PASSWORD TOGGLE ===== */
+        .toggle-password {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 5px;
+        }
+        .toggle-password:hover {
+            color: #ffc107;
+        }
+
+        /* ===== OPTIONS ===== */
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .login-options .form-check {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .login-options .form-check-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .login-options .form-check-input:checked {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .login-options .form-check-label {
+            font-size: 0.9rem;
+        }
+        .login-options a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .login-options a:hover {
+            color: #ffc107;
+        }
+
+        /* ===== BUTTON ===== */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ffc107, #f59e0b);
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.3);
+        }
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+        .btn-login .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(15, 23, 42, 0.2);
+            border-top-color: #0f172a;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn-login.loading .spinner {
+            display: block;
+        }
+        .btn-login.loading .btn-text {
+            display: none;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .divider::before { margin-left: 15px; }
+        .divider::after { margin-right: 15px; }
+
+        /* ===== SOCIAL BUTTONS ===== */
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-buttons .btn-social {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .social-buttons .btn-social:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .social-buttons .btn-social i {
+            margin-left: 8px;
+            font-size: 1.1rem;
+        }
+        .social-buttons .btn-social.google:hover { border-color: #ea4335; color: #ea4335; }
+        .social-buttons .btn-social.github:hover { border-color: #fff; color: #fff; }
+        .social-buttons .btn-social.linkedin:hover { border-color: #0a66c2; color: #0a66c2; }
+
+        /* ===== REGISTER LINK ===== */
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+        .register-link a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            background: rgba(34, 197, 94, 0.95);
+            color: white;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .notification.error {
+            background: rgba(220, 53, 69, 0.95);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 576px) {
+            .login-card { padding: 30px 20px; }
+            .login-logo .icon { width: 60px; height: 60px; font-size: 2rem; }
+            .social-buttons { flex-direction: column; }
+        }
+
+        /* ===== DARK MODE (مدمج مع الـ Hero) ===== */
+        /* الصفحة أصلاً Dark Mode فما نحتاج تبديل */
+    </style>
+</head>
+<body>
+
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div class="particles" id="particles"></div>
+
+    <!-- ===== NOTIFICATION ===== -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle me-2"></i>
+        <span id="notificationMessage">تم تسجيل الدخول بنجاح!</span>
+    </div>
+
+    <!-- ===== LOGIN WRAPPER ===== -->
+    <div class="login-wrapper">
+        <div class="login-card" data-aos="fade-up" data-aos-duration="1000">
+
+            <!-- LOGO -->
+            <div class="login-logo">
+                <div class="icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>أكاديمية <span>أحمد الحداد</span></h3>
+                <p>تسجيل الدخول إلى منصة التدريب</p>
+            </div>
+
+            <!-- FORM -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="emailInput" placeholder="البريد الإلكتروني" required />
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="passwordInput" placeholder="كلمة المرور" required />
+                    <i class="fas fa-lock input-icon"></i>
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                        <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                    </button>
+                </div>
+
+                <div class="login-options">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe" />
+                        <label class="form-check-label" for="rememberMe">تذكرني</label>
+                    </div>
+                    <a href="#">نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول</span>
+                    <span class="spinner"></span>
+                </button>
+            </form>
+
+            <!-- DIVIDER -->
+            <div class="divider">أو</div>
+
+            <!-- SOCIAL BUTTONS -->
+            <div class="social-buttons">
+                <a href="#" class="btn-social google" onclick="showNotification('جاري الاتصال بـ Google...', 'info')">
+                    <i class="fab fa-google"></i> Google
+                </a>
+                <a href="#" class="btn-social github" onclick="showNotification('جاري الاتصال بـ GitHub...', 'info')">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="#" class="btn-social linkedin" onclick="showNotification('جاري الاتصال بـ LinkedIn...', 'info')">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+            </div>
+
+            <!-- REGISTER LINK -->
+            <div class="register-link">
+                ليس لديك حساب؟ <a href="#">سجل الآن</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script>
+        // ===== PARTICLES =====
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 8 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 20 + 15 + 's';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ===== AOS =====
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // ===== TOGGLE PASSWORD =====
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('passwordInput');
+            const icon = document.getElementById('passwordToggleIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ===== NOTIFICATION =====
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const messageElement = document.getElementById('notificationMessage');
+
+            messageElement.textContent = message;
+            notification.className = 'notification';
+
+            if (type === 'error') {
+                notification.classList.add('error');
+            }
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== HANDLE LOGIN =====
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const btn = document.getElementById('loginBtn');
+
+            // التحقق من صحة الإدخال
+            if (!email || !password) {
+                showNotification('الرجاء إدخال البريد الإلكتروني وكلمة المرور', 'error');
+                return;
+            }
+
+            // محاكاة عملية تسجيل الدخول
+            btn.classList.add('loading');
+
+            setTimeout(() => {
+                btn.classList.remove('loading');
+
+                // تجربة تسجيل الدخول (للمتعة فقط)
+                if (email === 'admin@academy.com' && password === '123456') {
+                    showNotification('✅ تم تسجيل الدخول بنجاح! مرحباً بك في الأكاديمية');
+                    // هنا يمكن إعادة التوجيه إلى لوحة التحكم
+                } else if (email === 'ahmedict71214@gmail.com' && password === 'ahmed123') {
+                    showNotification('✅ مرحباً بك أيها المدرب!');
+                } else {
+                    showNotification('❌ البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
+                }
+            }, 2000);
+        }
+
+        // ===== ENTER KEY SUPPORT =====
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const form = document.getElementById('loginForm');
+                if (form) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        // ===== PREVENT DEFAULT FORM SUBMISSION =====
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>

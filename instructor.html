@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المهندس أحمد الحداد - المدرب</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* ===== GENERAL ===== */
+        :root {
+            --primary: #0d6efd;
+            --dark: #0f172a;
+            --gold: #ffc107;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Cairo', 'Poppins', sans-serif; padding-top: 70px; overflow-x: hidden; }
+
+        /* ===== NAVBAR ===== */
+        #mainNav {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.2);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.1);
+        }
+        #mainNav .navbar-brand { font-size: 1.4rem; font-weight: 700; }
+        #mainNav .navbar-brand .text-warning { color: #ffc107 !important; }
+        #mainNav .nav-link { font-weight: 500; font-size: 0.9rem; padding: 0.5rem 1rem !important; border-radius: 8px; transition: all 0.3s; }
+        #mainNav .nav-link:hover, #mainNav .nav-link.active { color: #ffc107 !important; background: rgba(255, 193, 7, 0.1); }
+
+        /* ===== INSTRUCTOR HERO ===== */
+        .instructor-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1a0a2a 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .instructor-hero::before {
+            content: '👨‍💻';
+            position: absolute;
+            font-size: 25rem;
+            opacity: 0.03;
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-10deg);
+        }
+        .profile-image-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, #ffc107, #f59e0b, #dc3545);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffc107;
+        }
+
+        /* ===== BADGE SKILLS ===== */
+        .badge-skill {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 3px;
+        }
+        .badge-skill.network { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd; }
+        .badge-skill.windows { background: #20c99720; color: #20c997; border: 1px solid #20c997; }
+        .badge-skill.linux { background: #ffc10720; color: #856404; border: 1px solid #ffc107; }
+        .badge-skill.security { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+        .badge-skill.cloud { background: #6610f220; color: #6610f2; border: 1px solid #6610f2; }
+        .badge-skill.database { background: #0ea5e920; color: #0ea5e9; border: 1px solid #0ea5e9; }
+        .badge-skill.python { background: #f59e0b20; color: #856404; border: 1px solid #f59e0b; }
+        .badge-skill.fortinet { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+
+        /* ===== STAT BOX ===== */
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+        }
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffc107;
+        }
+        .stat-box .label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline-item {
+            position: relative;
+            padding-right: 30px;
+            padding-bottom: 30px;
+            border-right: 3px solid #ffc107;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+            border-right: none;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #ffc107;
+            border-radius: 50%;
+            border: 3px solid #0f172a;
+        }
+        .timeline-item .year {
+            color: #ffc107;
+            font-weight: 700;
+        }
+
+        /* ===== CERT CARD ===== */
+        .cert-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+        }
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffc107;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.1);
+        }
+        .cert-card .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode { background: #121826; color: #e2e8f0; }
+        body.dark-mode .bg-light { background: #1a2332 !important; }
+        body.dark-mode .card { background: #1e293b !important; color: #e2e8f0 !important; }
+        body.dark-mode .card .text-muted { color: #94a3b8 !important; }
+        body.dark-mode .bg-white { background: #1e293b !important; }
+        body.dark-mode .cert-card { background: #1e293b !important; border-color: #334155; }
+        body.dark-mode .cert-card:hover { border-color: #ffc107; }
+        body.dark-mode #mainNav { background: rgba(10,15,26,0.98) !important; }
+        body.dark-mode .timeline-item::before { border-color: #1e293b; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.3s; border-radius: 50%;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) { .hero-section { min-height: 90vh; text-align: center; } }
+        @media (max-width: 576px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            #backToTop { width: 40px; height: 40px; bottom: 15px; right: 15px; }
+            .profile-image { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" class="btn btn-warning"><i class="fas fa-chevron-up"></i></button>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- ===== INSTRUCTOR HERO ===== -->
+    <section class="instructor-hero py-5" style="margin-top: 56px;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center" data-aos="fade-right">
+                    <div class="profile-image-wrapper">
+                        <img src="images/1776157239708.jpg" alt="المهندس أحمد الحداد" class="profile-image" />
+                    </div>
+                    <div class="mt-3">
+                        <span class="badge bg-warning text-dark">المدرب الرئيسي</span>
+                        <span class="badge bg-success">خبير معتمد</span>
+                    </div>
+                </div>
+                <div class="col-lg-8 text-white" data-aos="fade-left">
+                    <h1 class="display-4 fw-bold">المهندس <span class="text-warning">أحمد الحداد</span></h1>
+                    <p class="lead">إدارة أنظمة الحاسوب | قواعد البيانات | الأمن السيبراني</p>
+                    <p class="opacity-75" style="font-size:1.1rem;">
+                        خبير في تصميم وإدارة البنى التحتية لتقنية المعلومات، مع خبرة واسعة
+                        في الشبكات، السيرفرات، وأنظمة قواعد البيانات، والأمن السيبراني.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                        <a href="mailto:ahmedict71214@gmail.com" class="btn btn-warning">
+                            <i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com
+                        </a>
+                        <a href="tel:+970597514338" class="btn btn-outline-light">
+                            <i class="fas fa-phone me-2"></i>+970597514338
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="py-4 bg-dark">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-6 col-md-3" data-aos="fade-up">
+                    <div class="stat-box">
+                        <div class="number" data-target="8">0</div>
+                        <div class="label">سنوات خبرة</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-box">
+                        <div class="number" data-target="500">0+</div>
+                        <div class="label">متدرب دربهم</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-box">
+                        <div class="number" data-target="15">0+</div>
+                        <div class="label">شهادة احترافية</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-box">
+                        <div class="number" data-target="25">0+</div>
+                        <div class="label">مشروع منفذ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT INSTRUCTOR ===== -->
+    <section class="py-5" id="about-instructor">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <span class="badge bg-warning text-dark mb-2">نبذة عني</span>
+                    <h2 class="display-5 fw-bold">من أنا؟</h2>
+                    <p class="lead text-muted">
+                        أنا المهندس <strong>أحمد الحداد</strong>، متخصص في <strong>إدارة أنظمة الحاسوب</strong>،
+                        <strong>قواعد البيانات</strong>، و <strong>الأمن السيبراني</strong>.
+                    </p>
+                    <p class="text-muted">
+                        بدأت مسيرتي المهنية كمهندس شبكات، ثم تخصصت في إدارة السيرفرات
+                        وأنظمة قواعد البيانات، وأخيراً في الأمن السيبراني واختبار الاختراق.
+                    </p>
+                    <p class="text-muted">
+                        شغفي هو نقل المعرفة العملية التي تساعد الطلاب على دخول سوق العمل
+                        بثقة، لذلك أركّز في تدريبي على التطبيق العملي والمشاريع الواقعية.
+                    </p>
+                    <div class="mt-4">
+                        <h6 class="fw-bold"><i class="fas fa-tags text-warning me-2"></i>اختصاصاتي</h6>
+                        <div>
+                            <span class="badge-skill network"><i class="fas fa-network-wired me-1"></i>الشبكات</span>
+                            <span class="badge-skill windows"><i class="fab fa-windows me-1"></i>Windows Server</span>
+                            <span class="badge-skill linux"><i class="fab fa-linux me-1"></i>Linux</span>
+                            <span class="badge-skill security"><i class="fas fa-shield-halved me-1"></i>الأمن السيبراني</span>
+                            <span class="badge-skill cloud"><i class="fas fa-cloud me-1"></i>Cloud Computing</span>
+                            <span class="badge-skill database"><i class="fas fa-database me-1"></i>قواعد البيانات</span>
+                            <span class="badge-skill python"><i class="fab fa-python me-1"></i>Python</span>
+                            <span class="badge-skill fortinet"><i class="fas fa-shield me-1"></i>Fortinet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-address-card text-warning me-2"></i>معلومات التواصل</h5>
+                            <hr />
+                            <div class="d-flex gap-3 mb-3">
+                                <i class="fas fa-user text-warning fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">الاسم الكامل</small>
+                                    <p class="fw-bold mb-0">المهندس أحمد الحداد</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 mb-3">
+                                <i class="fas fa-phone text-success fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">رقم الهاتف</small>
+                                    <p class="fw-bold mb-0">+970597514338</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 mb-3">
+                                <i class="fas fa-envelope text-danger fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">البريد الإلكتروني</small>
+                                    <p class="fw-bold mb-0">ahmedict71214@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3">
+                                <i class="fas fa-map-marker-alt text-warning fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">الدولة</small>
+                                    <p class="fw-bold mb-0">فلسطين</p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="d-flex gap-3 justify-content-center">
+                                <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="btn btn-outline-danger btn-sm"><i class="fab fa-youtube"></i></a>
+                                <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/HomeLidark" target="_blank" class="btn btn-outline-secondary btn-sm"><i class="fab fa-github"></i></a>
+                                <a href="https://x.com/HomeLidark" target="_blank" class="btn btn-outline-info btn-sm"><i class="fab fa-x-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section class="py-5 bg-light" id="certifications">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الشهادات</span>
+                <h2 class="display-5 fw-bold">🏆 الشهادات الاحترافية</h2>
+                <p class="text-muted">بعض الشهادات التي حصلت عليها</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="flip-left">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fas fa-network-wired" style="color:#0d6efd;"></i></div>
+                        <h6 class="fw-bold">CCNA</h6>
+                        <small class="text-muted">Cisco</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="100">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fas fa-shield-halved" style="color:#dc3545;"></i></div>
+                        <h6 class="fw-bold">Security+</h6>
+                        <small class="text-muted">CompTIA</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="200">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fab fa-microsoft" style="color:#20c997;"></i></div>
+                        <h6 class="fw-bold">MCSA</h6>
+                        <small class="text-muted">Microsoft</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="300">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fas fa-database" style="color:#f59e0b;"></i></div>
+                        <h6 class="fw-bold">Oracle DBA</h6>
+                        <small class="text-muted">Oracle</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="400">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fas fa-skull" style="color:#557c94;"></i></div>
+                        <h6 class="fw-bold">CEH</h6>
+                        <small class="text-muted">EC-Council</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="500">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fas fa-user-secret" style="color:#0f172a;"></i></div>
+                        <h6 class="fw-bold">OSCP</h6>
+                        <small class="text-muted">Offensive Security</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="600">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fab fa-aws" style="color:#f59e0b;"></i></div>
+                        <h6 class="fw-bold">AWS</h6>
+                        <small class="text-muted">Amazon</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="700">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="fab fa-microsoft" style="color:#0ea5e9;"></i></div>
+                        <h6 class="fw-bold">Azure</h6>
+                        <small class="text-muted">Microsoft</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIMELINE (EXPERIENCE) ===== -->
+    <section class="py-5" id="experience">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الخبرات</span>
+                <h2 class="display-5 fw-bold">📋 المسيرة المهنية</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline-item" data-aos="fade-right">
+                        <span class="year">2024 - الآن</span>
+                        <h5 class="fw-bold">المدرب الرئيسي</h5>
+                        <p class="text-muted">أكاديمية أحمد الحداد - تدريب المهندسين في الشبكات والأمن السيبراني.</p>
+                    </div>
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                        <span class="year">2020 - 2024</span>
+                        <h5 class="fw-bold">مهندس شبكات وأمن سيبراني</h5>
+                        <p class="text-muted">إدارة البنية التحتية للشبكات، السيرفرات، وأنظمة الأمن في شركات كبرى.</p>
+                    </div>
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                        <span class="year">2018 - 2020</span>
+                        <h5 class="fw-bold">مسؤول أنظمة وقواعد بيانات</h5>
+                        <p class="text-muted">إدارة خوادم Windows و Linux، وصيانة قواعد البيانات.</p>
+                    </div>
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                        <span class="year">2016 - 2018</span>
+                        <h5 class="fw-bold">فني شبكات</h5>
+                        <p class="text-muted">بداية المسيرة في مجال الشبكات والبنية التحتية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TEACHING PHILOSOPHY ===== -->
+    <section class="py-5 bg-light" id="philosophy">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">فلسفتي في التدريب</span>
+                <h2 class="display-5 fw-bold">💡 كيف أدرّب؟</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-laptop-code fa-3x text-warning mb-3"></i>
+                        <h5 class="fw-bold">70% تطبيق عملي</h5>
+                        <p class="small text-muted">أؤمن بأن التعلم الحقيقي يحدث عندما تطبق بنفسك على أجهزة حقيقية.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-project-diagram fa-3x text-warning mb-3"></i>
+                        <h5 class="fw-bold">مشاريع واقعية</h5>
+                        <p class="small text-muted">كل موضوع تتعلمه ينتهي بمشروع يحاكي بيئة عمل حقيقية.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-users fa-3x text-warning mb-3"></i>
+                        <h5 class="fw-bold">مجتمع تعلم</h5>
+                        <p class="small text-muted">نبني مجتمعاً من المتدربين يتشاركون الخبرات ويساعدون بعضهم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script>
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ===== ANIMATED COUNTERS =====
+        const counters = document.querySelectorAll('.stat-box .number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 60;
+                    const update = () => {
+                        current += increment;
+                        if (current >= target) { entry.target.textContent = target; return; }
+                        entry.target.textContent = Math.round(current);
+                        requestAnimationFrame(update);
+                    };
+                    update();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObserver.observe(c));
+
+        // ===== DARK MODE =====
+        const darkToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // ===== AOS =====
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

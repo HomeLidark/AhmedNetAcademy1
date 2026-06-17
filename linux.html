@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linux - أكاديمية الشبكات والأمن السيبراني</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        /* ===== LINUX THEME ===== */
+        .linux-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1a0a0a 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .linux-hero::before {
+            content: '🐧';
+            position: absolute;
+            font-size: 25rem;
+            opacity: 0.03;
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-10deg);
+        }
+
+        .terminal-window {
+            background: #0a0f1a;
+            border-radius: 16px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            direction: ltr;
+            text-align: left;
+            border: 1px solid #1e293b;
+            overflow-x: auto;
+            position: relative;
+        }
+        .terminal-window .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e293b;
+        }
+        .terminal-window .terminal-header .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .terminal-window .terminal-header .dot.red { background: #ef4444; }
+        .terminal-window .terminal-header .dot.yellow { background: #f59e0b; }
+        .terminal-window .terminal-header .dot.green { background: #22c55e; }
+        .terminal-window .prompt { color: #22c55e; }
+        .terminal-window .cmd { color: #fbbf24; }
+        .terminal-window .output { color: #94a3b8; }
+        .terminal-window .highlight { color: #f43f5e; }
+        .terminal-window .comment { color: #64748b; font-style: italic; }
+        .terminal-window .string { color: #34d399; }
+        .terminal-window .number { color: #fbbf24; }
+        .terminal-window .keyword { color: #f472b6; }
+        .terminal-window .variable { color: #0ea5e9; }
+
+        .distro-card {
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+        }
+        .distro-card:hover {
+            transform: translateY(-10px);
+            border-color: #fbbf24;
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.1);
+        }
+        .distro-card .distro-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        body.dark-mode .distro-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .command-card {
+            border-right: 4px solid #fbbf24;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            background: white;
+        }
+        .command-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+        body.dark-mode .command-card {
+            background: #1e293b;
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #0d6efd;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.08);
+        }
+        body.dark-mode .service-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .code-block {
+            background: #0a0f1a;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            direction: ltr;
+            text-align: left;
+            border-right: 4px solid #fbbf24;
+            overflow-x: auto;
+            margin-bottom: 10px;
+        }
+        .code-block .prompt { color: #22c55e; }
+        .code-block .cmd { color: #fbbf24; }
+        .code-block .output { color: #94a3b8; }
+        .code-block .comment { color: #64748b; }
+        .code-block .string { color: #34d399; }
+
+        .compare-table th {
+            background: #0f172a;
+            color: white;
+        }
+        body.dark-mode .compare-table td {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+        body.dark-mode .compare-table th {
+            background: #0a0f1a;
+        }
+
+        .linux-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .linux-badge.ubuntu { background: #e9542020; color: #e95420; border: 1px solid #e95420; }
+        .linux-badge.rocky { background: #10b98120; color: #10b981; border: 1px solid #10b981; }
+        .linux-badge.kali { background: #557c9420; color: #557c94; border: 1px solid #557c94; }
+        .linux-badge.command { background: #fbbf2420; color: #856404; border: 1px solid #fbbf24; }
+        .linux-badge.service { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd; }
+        .linux-badge.security { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- ===== LINUX HERO ===== -->
+    <section class="linux-hero py-5" style="margin-top: 56px;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-white" data-aos="fade-up">
+                    <span class="badge bg-warning text-dark mb-3 fs-6">🐧 المسار الرابع</span>
+                    <h1 class="display-4 fw-bold">Linux <span class="text-warning">Administration</span></h1>
+                    <p class="lead opacity-75">
+                        من <span class="text-warning">الأوامر الأساسية</span> إلى <span class="text-warning">إدارة السيرفرات</span>
+                        و <span class="text-warning">الأتمتة</span> — نظام التشغيل الأقوى للبنية التحتية
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="linux-badge ubuntu"><i class="fab fa-ubuntu me-1"></i>Ubuntu</span>
+                        <span class="linux-badge rocky"><i class="fas fa-rocket me-1"></i>Rocky Linux</span>
+                        <span class="linux-badge kali"><i class="fas fa-skull me-1"></i>Kali Linux</span>
+                        <span class="linux-badge command"><i class="fas fa-terminal me-1"></i>Bash</span>
+                        <span class="linux-badge service"><i class="fas fa-cogs me-1"></i>Systemd</span>
+                        <span class="linux-badge security"><i class="fas fa-shield me-1"></i>Firewall</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center" data-aos="fade-left">
+<i class="fab fa-linux" style="font-size:80px;color:#fbbf24;"></i>
+                    <div class="mt-3">
+                        <span class="badge bg-warning text-dark fs-6"><i class="fas fa-tux me-1"></i> Tux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DISTRIBUTIONS ===== -->
+    <section class="py-5" id="distributions">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">التوزيعات</span>
+                <h2 class="display-5 fw-bold">📦 توزيعات Linux</h2>
+                <p class="text-muted">أشهر التوزيعات المستخدمة في المؤسسات</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-up">
+                    <div class="distro-card h-100">
+                        <div class="distro-icon"><i class="fab fa-ubuntu" style="color:#e95420;"></i></div>
+                        <h5 class="fw-bold">Ubuntu</h5>
+                        <p class="small text-muted">التوزيعة الأكثر شيوعاً للمبتدئين والخوادم.</p>
+                        <span class="badge bg-primary">Server</span>
+                        <span class="badge bg-success">Desktop</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="distro-card h-100">
+                        <div class="distro-icon"><i class="fas fa-rocket" style="color:#10b981;"></i></div>
+                        <h5 class="fw-bold">Rocky Linux</h5>
+                        <p class="small text-muted">البديل القوي لـ CentOS، مثالي للخوادم المؤسسية.</p>
+                        <span class="badge bg-danger">Enterprise</span>
+                        <span class="badge bg-primary">Stable</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="distro-card h-100">
+                        <div class="distro-icon"><i class="fas fa-skull" style="color:#557c94;"></i></div>
+                        <h5 class="fw-bold">Kali Linux</h5>
+                        <p class="small text-muted">التوزيعة الرسمية لاختبار الاختراق والأمن السيبراني.</p>
+                        <span class="badge bg-danger">Pentesting</span>
+                        <span class="badge bg-warning text-dark">Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TERMINAL WINDOW (LIVE DEMO) ===== -->
+    <section class="py-5 bg-light" id="terminal">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">التطبيق العملي</span>
+                <h2 class="display-5 fw-bold">💻 Terminal Live</h2>
+                <p class="text-muted">أوامر Linux الأساسية في واجهة محاكية</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="fade-up">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="text-white-50 small ms-2">root@linux-server:~</span>
+                        </div>
+
+                        <span class="comment"># نظام الملفات</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">ls -la</span><br />
+                        <span class="output">drwxr-xr-x  5 root root 4096 Jun 17 10:30 .</span><br />
+                        <span class="output">drwxr-xr-x 20 root root 4096 Jun 17 10:20 ..</span><br />
+                        <span class="output">-rw-r--r--  1 root root  220 Jun 17 10:25 .bashrc</span><br />
+                        <span class="output">drwxr-xr-x  2 root root 4096 Jun 17 10:30 Documents</span><br /><br />
+
+                        <span class="comment"># إدارة المستخدمين</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">useradd -m -s /bin/bash ahmed</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">passwd ahmed</span><br />
+                        <span class="output">New password: ********</span><br />
+                        <span class="output">Retype new password: ********</span><br />
+                        <span class="output">passwd: password updated successfully</span><br /><br />
+
+                        <span class="comment"># الصلاحيات</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">chmod 755 script.sh</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">chown ahmed:ahmed script.sh</span><br /><br />
+
+                        <span class="comment"># الشبكات</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">ip addr show</span><br />
+                        <span class="output">1: lo: &lt;LOOPBACK,UP&gt; mtu 65536 qdisc noqueue</span><br />
+                        <span class="output">    inet 127.0.0.1/8 scope host lo</span><br />
+                        <span class="output">2: eth0: &lt;BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc pfifo_fast</span><br />
+                        <span class="output">    inet <span class="highlight">192.168.1.100/24</span> brd 192.168.1.255 scope global eth0</span><br /><br />
+
+                        <span class="comment"># تثبيت حزمة</span><br />
+                        <span class="prompt">root@server:~#</span> <span class="cmd">apt update &amp;&amp; apt install nginx -y</span><br />
+                        <span class="output">Reading package lists... Done</span><br />
+                        <span class="output">Building dependency tree... Done</span><br />
+                        <span class="output">nginx is already the newest version (1.18.0)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMMANDS REFERENCE ===== -->
+    <section class="py-5" id="commands">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الأوامر الأساسية</span>
+                <h2 class="display-5 fw-bold">⌨️ أوامر Linux الأساسية</h2>
+                <p class="text-muted">أهم الأوامر التي تحتاجها يومياً</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- File Commands -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h5 class="fw-bold text-warning"><i class="fas fa-folder me-2"></i>الملفات والمجلدات</h5>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">ls</code>
+                        <small class="text-muted me-2">- عرض محتويات المجلد</small>
+                        <span class="badge bg-secondary">ls -la</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">cd</code>
+                        <small class="text-muted me-2">- تغيير المجلد الحالي</small>
+                        <span class="badge bg-secondary">cd /home</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">cp</code>
+                        <small class="text-muted me-2">- نسخ ملف أو مجلد</small>
+                        <span class="badge bg-secondary">cp file1 file2</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">mv</code>
+                        <small class="text-muted me-2">- نقل أو إعادة تسمية</small>
+                        <span class="badge bg-secondary">mv oldname newname</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">rm</code>
+                        <small class="text-muted me-2">- حذف ملف</small>
+                        <span class="badge bg-danger">rm -rf folder</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">mkdir</code>
+                        <small class="text-muted me-2">- إنشاء مجلد جديد</small>
+                        <span class="badge bg-secondary">mkdir newfolder</span>
+                    </div>
+                </div>
+
+                <!-- System Commands -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h5 class="fw-bold text-warning"><i class="fas fa-cogs me-2"></i>النظام والعمليات</h5>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">systemctl</code>
+                        <small class="text-muted me-2">- إدارة الخدمات</small>
+                        <span class="badge bg-secondary">systemctl start nginx</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">ps</code>
+                        <small class="text-muted me-2">- عرض العمليات</small>
+                        <span class="badge bg-secondary">ps aux | grep nginx</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">kill</code>
+                        <small class="text-muted me-2">- إنهاء عملية</small>
+                        <span class="badge bg-danger">kill -9 PID</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">df</code>
+                        <small class="text-muted me-2">- عرض مساحة التخزين</small>
+                        <span class="badge bg-secondary">df -h</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">free</code>
+                        <small class="text-muted me-2">- عرض الذاكرة</small>
+                        <span class="badge bg-secondary">free -m</span>
+                    </div>
+                    <div class="command-card p-3 mb-2">
+                        <code class="text-warning">ping</code>
+                        <small class="text-muted me-2">- اختبار الاتصال</small>
+                        <span class="badge bg-secondary">ping google.com</span>
+                    </div>
+                </div>
+
+                <!-- Permissions -->
+                <div class="col-12" data-aos="fade-up">
+                    <h5 class="fw-bold text-warning"><i class="fas fa-lock me-2"></i>الصلاحيات</h5>
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <div class="command-card p-3">
+                                <code class="text-warning">chmod 755 file</code>
+                                <small class="d-block text-muted">rwxr-xr-x</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="command-card p-3">
+                                <code class="text-warning">chmod 644 file</code>
+                                <small class="d-block text-muted">rw-r--r--</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="command-card p-3">
+                                <code class="text-warning">chown user:group file</code>
+                                <small class="d-block text-muted">تغيير المالك والمجموعة</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="py-5 bg-light" id="services">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الخدمات</span>
+                <h2 class="display-5 fw-bold">🚀 خدمات Linux</h2>
+                <p class="text-muted">أهم الخدمات التي تُشغل على خوادم Linux</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="zoom-in">
+                    <div class="service-card h-100">
+                        <i class="fas fa-globe fa-3x text-primary mb-2"></i>
+                        <h6 class="fw-bold">Apache</h6>
+                        <small class="text-muted">Web Server</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="50">
+                    <div class="service-card h-100">
+                        <i class="fas fa-globe fa-3x text-success mb-2"></i>
+                        <h6 class="fw-bold">Nginx</h6>
+                        <small class="text-muted">Web Server / Proxy</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-card h-100">
+                        <i class="fas fa-database fa-3x text-danger mb-2"></i>
+                        <h6 class="fw-bold">MariaDB</h6>
+                        <small class="text-muted">قاعدة بيانات</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="service-card h-100">
+                        <i class="fas fa-user-shield fa-3x text-warning mb-2"></i>
+                        <h6 class="fw-bold">SSH</h6>
+                        <small class="text-muted">اتصال آمن</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-card h-100">
+                        <i class="fas fa-fire fa-3x text-info mb-2"></i>
+                        <h6 class="fw-bold">FirewallD</h6>
+                        <small class="text-muted">جدار حماية</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="service-card h-100">
+                        <i class="fas fa-clock fa-3x text-secondary mb-2"></i>
+                        <h6 class="fw-bold">Cron</h6>
+                        <small class="text-muted">مهام مجدولة</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-card h-100">
+                        <i class="fas fa-code fa-3x text-purple mb-2" style="color:#a855f7;"></i>
+                        <h6 class="fw-bold">Bash</h6>
+                        <small class="text-muted">سكريبتات</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="350">
+                    <div class="service-card h-100">
+                        <i class="fas fa-shield-halved fa-3x text-danger mb-2"></i>
+                        <h6 class="fw-bold">Fail2Ban</h6>
+                        <small class="text-muted">حماية</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CISCO VS LINUX (مقارنة فانتاستيك) ===== -->
+    <section class="py-5" id="compare">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">المقارنة</span>
+                <h2 class="display-5 fw-bold">⚡ Cisco vs Linux</h2>
+                <p class="text-muted">تشابه الأوامر بين عالمي الشبكات والسيرفرات</p>
+            </div>
+
+            <div class="table-responsive" data-aos="fade-up">
+                <table class="table table-bordered compare-table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">المهمة</th>
+                            <th class="text-center">🔵 Cisco (IOS)</th>
+                            <th class="text-center">🐧 Linux (Bash)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>عرض الواجهات</td>
+                            <td><code class="text-primary">show ip interface brief</code></td>
+                            <td><code class="text-warning">ip addr show</code> أو <code class="text-warning">ifconfig</code></td>
+                        </tr>
+                        <tr>
+                            <td>اختبار الاتصال</td>
+                            <td><code class="text-primary">ping 192.168.1.1</code></td>
+                            <td><code class="text-warning">ping 192.168.1.1</code></td>
+                        </tr>
+                        <tr>
+                            <td>تعيين IP</td>
+                            <td><code class="text-primary">ip address 192.168.1.1 255.255.255.0</code></td>
+                            <td><code class="text-warning">ip addr add 192.168.1.1/24 dev eth0</code></td>
+                        </tr>
+                        <tr>
+                            <td>عرض المسارات</td>
+                            <td><code class="text-primary">show ip route</code></td>
+                            <td><code class="text-warning">ip route show</code> أو <code class="text-warning">route -n</code></td>
+                        </tr>
+                        <tr>
+                            <td>إضافة مسار</td>
+                            <td><code class="text-primary">ip route 0.0.0.0 0.0.0.0 192.168.1.254</code></td>
+                            <td><code class="text-warning">ip route add default via 192.168.1.254</code></td>
+                        </tr>
+                        <tr>
+                            <td>جدار الحماية</td>
+                            <td><code class="text-primary">access-list 100 deny ip ...</code></td>
+                            <td><code class="text-warning">iptables -A INPUT -j DROP</code></td>
+                        </tr>
+                        <tr>
+                            <td>عرض المستخدمين</td>
+                            <td><code class="text-primary">show users</code></td>
+                            <td><code class="text-warning">who</code> أو <code class="text-warning">w</code></td>
+                        </tr>
+                        <tr>
+                            <td>إنهاء جلسة</td>
+                            <td><code class="text-primary">clear line vty 0</code></td>
+                            <td><code class="text-warning">pkill -u username</code></td>
+                        </tr>
+                        <tr>
+                            <td>عرض الوقت</td>
+                            <td><code class="text-primary">show clock</code></td>
+                            <td><code class="text-warning">date</code></td>
+                        </tr>
+                        <tr>
+                            <td>حفظ الإعدادات</td>
+                            <td><code class="text-primary">write memory</code></td>
+                            <td><code class="text-warning">history</code> + <code class="text-warning">!!</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-3" data-aos="fade-up">
+                <span class="badge bg-primary fs-6"><i class="fas fa-lightbulb me-2"></i>نصيحة: تعلم أوامر Linux يساعدك في فهم أوامر Cisco والعكس!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BASH SCRIPTS ===== -->
+    <section class="py-5 bg-light" id="bash">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الأتمتة</span>
+                <h2 class="display-5 fw-bold">📜 Bash Scripting</h2>
+                <p class="text-muted">أتمتة المهام باستخدام سكريبتات Bash</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>سكريبت النسخ الاحتياطي</h5>
+                            <div class="code-block">
+                                <span class="comment">#!/bin/bash</span><br />
+                                <span class="comment"># Backup Script</span><br />
+                                <span class="variable">BACKUP_DIR</span>=<span class="string">"/backup"</span><br />
+                                <span class="variable">SOURCE_DIR</span>=<span class="string">"/var/www"</span><br />
+                                <span class="variable">DATE</span>=<span class="cmd">$(date +%Y%m%d)</span><br /><br />
+                                <span class="cmd">mkdir</span> -p <span class="variable">$BACKUP_DIR</span><br />
+                                <span class="cmd">tar</span> -czf <span class="variable">$BACKUP_DIR</span>/backup-<span class="variable">$DATE</span>.tar.gz <span class="variable">$SOURCE_DIR</span><br />
+                                <span class="cmd">echo</span> <span class="string">"Backup completed: backup-$DATE.tar.gz"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="fw-bold"><i class="fas fa-robot text-warning me-2"></i>سكريبت مراقبة الخدمات</h5>
+                            <div class="code-block">
+                                <span class="comment">#!/bin/bash</span><br />
+                                <span class="comment"># Service Monitor</span><br />
+                                <span class="variable">SERVICE</span>=<span class="string">"nginx"</span><br /><br />
+                                <span class="cmd">if</span> <span class="cmd">systemctl</span> is-active --quiet <span class="variable">$SERVICE</span>; <span class="cmd">then</span><br />
+                                &nbsp;&nbsp;<span class="cmd">echo</span> <span class="string">"✅ $SERVICE is running"</span><br />
+                                <span class="cmd">else</span><br />
+                                &nbsp;&nbsp;<span class="cmd">echo</span> <span class="string">"❌ $SERVICE is down! Restarting..."</span><br />
+                                &nbsp;&nbsp;<span class="cmd">systemctl</span> restart <span class="variable">$SERVICE</span><br />
+                                &nbsp;&nbsp;<span class="cmd">echo</span> <span class="string">"$SERVICE restarted at $(date)"</span> >> /var/log/service-monitor.log<br />
+                                <span class="cmd">fi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CISCO & LINUX (شغل فانتاستيك) ===== -->
+    <section class="py-5" id="cisco-linux">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary mb-2">التكامل</span>
+                <h2 class="display-5 fw-bold">🔗 Cisco + Linux = 🔥</h2>
+                <p class="text-muted">كيفية ربط عالم الشبكات بالسيرفرات</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="flip-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-dark text-white">
+                            <i class="fas fa-network-wired me-2"></i> تكوين Cisco
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block" style="font-size:0.75rem;">
+                                <span class="comment">! تكوين SVI (VLAN Interface)</span><br />
+                                <span class="prompt">Switch#</span> <span class="keyword">configure terminal</span><br />
+                                <span class="prompt">Switch(config)#</span> <span class="keyword">interface</span> vlan 10<br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">ip address</span> <span class="string">192.168.10.1</span> <span class="number">255.255.255.0</span><br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">no shutdown</span><br />
+                                <span class="prompt">Switch(config)#</span> <span class="keyword">ip default-gateway</span> <span class="string">192.168.10.254</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="flip-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-dark text-white">
+                            <i class="fab fa-linux me-2"></i> تكوين Linux
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block" style="font-size:0.75rem;">
+                                <span class="comment"># تكوين IP على Linux</span><br />
+                                <span class="prompt">root@server:~#</span> <span class="cmd">ip addr add</span> <span class="string">192.168.10.10/24</span> dev eth0<br />
+                                <span class="prompt">root@server:~#</span> <span class="cmd">ip route add default via</span> <span class="string">192.168.10.1</span><br /><br />
+                                <span class="comment"># اختبار الاتصال مع Cisco</span><br />
+                                <span class="prompt">root@server:~#</span> <span class="cmd">ping</span> <span class="string">192.168.10.1</span><br />
+                                <span class="output">64 bytes from 192.168.10.1: icmp_seq=1 ttl=255 time=1.2 ms</span><br />
+                                <span class="output">64 bytes from 192.168.10.1: icmp_seq=2 ttl=255 time=0.9 ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center" data-aos="fade-up">
+                <div class="alert alert-warning">
+                    <i class="fas fa-star text-warning me-2"></i>
+                    <strong>خدعة فانتاستيك:</strong> يمكنك استخدام Linux كـ <strong>DHCP Server</strong> لتوزيع العناوين على شبكة Cisco!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LABS ===== -->
+    <section class="py-5 bg-light" id="labs">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">مختبرات Linux</span>
+                <h2 class="display-5 fw-bold">🧪 مختبرات Linux العملية</h2>
+                <p class="text-muted">طبق أوامر Linux على سيناريوهات واقعية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-up">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-warning text-dark mb-2">Lab 1</span>
+                            <h5 class="fw-bold">Linux Basics</h5>
+                            <p class="small text-muted">الأوامر الأساسية، نظام الملفات، إدارة المستخدمين.</p>
+                            <a href="#" class="btn btn-sm btn-outline-warning">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Lab 2</span>
+                            <h5 class="fw-bold">Web Server Setup</h5>
+                            <p class="small text-muted">تثبيت Apache/Nginx وإعداد موقع ويب.</p>
+                            <a href="#" class="btn btn-sm btn-outline-success">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">Lab 3</span>
+                            <h5 class="fw-bold">Firewall & Security</h5>
+                            <p class="small text-muted">تكوين FirewallD، SSH hardening، Fail2Ban.</p>
+                            <a href="#" class="btn btn-sm btn-outline-danger">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

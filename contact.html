@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتصل بنا - أكاديمية الشبكات والأمن السيبراني</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        }
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            color: #0f172a;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .social-link:hover {
+            background: #0d6efd;
+            color: white;
+            transform: translateY(-3px);
+        }
+        body.dark-mode .contact-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        body.dark-mode .social-link {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        body.dark-mode .social-link:hover {
+            background: #0d6efd;
+        }
+        body.dark-mode .form-control {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        body.dark-mode .form-control:focus {
+            border-color: #0d6efd;
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 300px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="py-5" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); margin-top: 56px;">
+        <div class="container py-4 text-white" data-aos="fade-up">
+            <span class="badge bg-primary mb-3 fs-6">📞 تواصل معنا</span>
+            <h1 class="display-4 fw-bold">اتصل بنا</h1>
+            <p class="lead opacity-75">نحن هنا للإجابة عن جميع استفساراتك</p>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Contact Info -->
+                <div class="col-lg-4" data-aos="fade-right">
+                    <h2 class="fw-bold mb-4">معلومات الاتصال</h2>
+                    
+                    <div class="contact-card mb-3">
+                        <div class="contact-icon bg-primary text-white">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h6 class="fw-bold">الهاتف</h6>
+                        <p class="text-muted mb-0">+970597514338</p>
+                    </div>
+
+                    <div class="contact-card mb-3">
+                        <div class="contact-icon bg-success text-white">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h6 class="fw-bold">البريد الإلكتروني</h6>
+                        <p class="text-muted mb-0">ahmedict71214@gmail.com</p>
+                    </div>
+
+                    <div class="contact-card mb-3">
+                        <div class="contact-icon bg-warning text-dark">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h6 class="fw-bold">العنوان</h6>
+                        <p class="text-muted mb-0">فلسطين</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <h6 class="fw-bold mb-3">تابعنا على</h6>
+                        <div class="d-flex gap-2">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-8" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-3"><i class="fas fa-pen text-primary me-2"></i>أرسل لنا رسالة</h4>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">الاسم الكامل</label>
+                                        <input type="text" class="form-control" placeholder="أدخل اسمك" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">البريد الإلكتروني</label>
+                                        <input type="email" class="form-control" placeholder="example@email.com" required />
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold">رقم الهاتف</label>
+                                        <input type="tel" class="form-control" placeholder="+970 59 751 4338" />
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold">الموضوع</label>
+                                        <select class="form-select">
+                                            <option>استفسار عام</option>
+                                            <option>استفسار عن الدبلوم</option>
+                                            <option>طلب تسجيل</option>
+                                            <option>مشكلة تقنية</option>
+                                            <option>اقتراح</option>
+                                            <option>شكوى</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold">الرسالة</label>
+                                        <textarea class="form-control" rows="5" placeholder="اكتب رسالتك هنا..."></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                                            <i class="fas fa-paper-plane me-2"></i>إرسال الرسالة
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Map -->
+            <div class="mt-5" data-aos="fade-up">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27233.021816286927!2d35.1979625!3d31.538396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d7d68c5d5f4b%3A0x3c9e3b8b0c5e5f4b!2sBethlehem!5e0!3m2!1sen!2sps!4v1700000000000" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

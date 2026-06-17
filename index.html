@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أكاديمية أحمد الحداد - دبلوم الشبكات والأمن السيبراني</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* ===== ROOT ===== */
+        :root {
+            --primary: #0d6efd;
+            --dark: #0f172a;
+            --gold: #ffc107;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Cairo', 'Poppins', sans-serif; padding-top: 70px; overflow-x: hidden; }
+
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; background: var(--dark);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 99999; transition: opacity 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; }
+
+        /* ===== NAVBAR ===== */
+        #mainNav {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+        }
+        #mainNav .navbar-brand {
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        #mainNav .navbar-brand:hover {
+            transform: scale(1.02);
+        }
+        #mainNav .navbar-brand .text-warning {
+            color: #ffc107 !important;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+        #mainNav .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        #mainNav .nav-link:hover,
+        #mainNav .nav-link.active {
+            color: #ffc107 !important;
+            background: rgba(255, 193, 7, 0.08);
+            transform: translateY(-1px);
+        }
+        #mainNav .btn-warning {
+            background: linear-gradient(135deg, #ffc107, #f59e0b);
+            border: none;
+            color: #0f172a;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+        #mainNav .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+        #mainNav .btn-outline-light {
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        #mainNav .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+        #mainNav .btn-outline-secondary {
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        #mainNav .btn-outline-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+        .navbar-toggler {
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            position: relative; min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1a2332 100%);
+            overflow: hidden;
+        }
+        .hero-section .hero-overlay {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(13,110,253,0.15), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-section h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; }
+        .typing-text::after { content: '|'; animation: blink 0.8s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ===== FEATURES ===== */
+        .feature-card {
+            transition: all 0.3s ease; border-radius: 20px; overflow: hidden;
+        }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(13,110,253,0.15) !important; }
+        .feature-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+
+        /* ===== ROADMAP ===== */
+        .roadmap { position: relative; padding-right: 30px; }
+        .roadmap::before {
+            content: ''; position: absolute; right: 15px; top: 0; bottom: 0;
+            width: 3px; background: linear-gradient(to bottom, var(--primary), #6610f2, #dc3545, #ffc107);
+            border-radius: 10px;
+        }
+        .roadmap-item { position: relative; margin-bottom: 2.5rem; padding-right: 40px; }
+        .roadmap-item:last-child { margin-bottom: 0; }
+        .roadmap-icon {
+            position: absolute; right: -10px; top: 0;
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 2;
+            border-radius: 50%;
+        }
+        .roadmap-content { border-right: 4px solid var(--primary); transition: all 0.3s; border-radius: 16px; }
+        .roadmap-content:hover { transform: translateX(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important; }
+
+        /* ===== CERTIFICATIONS ===== */
+        .cert-card { transition: all 0.3s; border: 2px solid transparent; border-radius: 16px; padding: 15px; }
+        .cert-card:hover { transform: scale(1.05); border-color: var(--primary); box-shadow: 0 10px 30px rgba(13,110,253,0.15) !important; }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode { background: #121826; color: #e2e8f0; }
+        body.dark-mode .bg-light { background: #1a2332 !important; }
+        body.dark-mode .card { background: #1e293b !important; color: #e2e8f0 !important; }
+        body.dark-mode .card .text-muted { color: #94a3b8 !important; }
+        body.dark-mode .bg-white { background: #1e293b !important; }
+        body.dark-mode .cert-card { background: #1e293b !important; }
+        body.dark-mode .hero-section { background: linear-gradient(135deg, #0a0f1a 0%, #121826 100%); }
+        body.dark-mode #mainNav { background: rgba(10,15,26,0.98) !important; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.3s; border-radius: 50%;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero-section { min-height: 90vh; text-align: center; }
+            .roadmap { padding-right: 0; }
+            .roadmap::before { display: none; }
+            .roadmap-item { padding-right: 0; }
+            .roadmap-icon { position: relative; right: 0; margin-bottom: 10px; }
+        }
+        @media (max-width: 576px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            .feature-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+            #backToTop { width: 40px; height: 40px; bottom: 15px; right: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="spinner-border text-warning" role="status"><span class="visually-hidden">جاري التحميل...</span></div>
+        <p class="mt-3 text-white">أكاديمية أحمد الحداد</p>
+    </div>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" class="btn btn-warning"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- ============================================================
+    NAVBAR
+    ============================================================ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <!-- ===== الشعار ===== -->
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-graduation-cap text-warning me-2"></i>
+                <span style="font-size:1.2rem;">أكاديمية</span>
+                <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+            </a>
+
+            <!-- ===== زر القائمة للجوال ===== -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- ===== الروابط ===== -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">🏠 الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                    <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                    <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+
+                <!-- ===== الأزرار الجانبية ===== -->
+                <div class="d-flex gap-2 align-items-center">
+                    <!-- زر المدرب -->
+                    <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                        <i class="fas fa-user-tie me-1"></i> المدرب
+                    </a>
+                    <!-- زر تسجيل الدخول -->
+                    <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                        <i class="fas fa-sign-in-alt me-1"></i> دخول
+                    </a>
+                    <!-- زر الوضع المظلم -->
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <header class="hero-section d-flex align-items-center">
+        <div class="container position-relative">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-7 text-white" data-aos="fade-up">
+                    <span class="badge bg-warning text-dark mb-3 fs-6">🎓 دبلوم احترافي 2026</span>
+                    <h1 class="display-3 fw-bold mb-3">
+                        الشبكات <br />
+                        <span class="text-warning typing-text" id="typingText"></span>
+                    </h1>
+                    <p class="lead mb-4 opacity-75">
+                        خطة دراسية متكاملة تجمع بين الشبكات العملية (Cisco)،
+                        إدارة السيرفرات (Windows & Linux)، وأمن المعلومات مع اختبار الاختراق.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="curriculum.html" class="btn btn-warning btn-lg px-5 fw-bold" style="color:#0f172a;">
+                            <i class="fas fa-graduation-cap me-2"></i>استكشف المنهج
+                        </a>
+                        <a href="#features" class="btn btn-outline-light btn-lg px-5">
+                            <i class="fas fa-play-circle me-2"></i>شاهد المزيد
+                        </a>
+                    </div>
+                    <div class="mt-5 d-flex gap-4 flex-wrap">
+                        <div><i class="fas fa-check-circle text-warning"></i> 120+ ساعة تدريب</div>
+                        <div><i class="fas fa-check-circle text-warning"></i> 50+ مختبر عملي</div>
+                        <div><i class="fas fa-check-circle text-warning"></i> 10 مشاريع احترافية</div>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block text-center" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop" alt="Network" class="img-fluid rounded-4 shadow" />
+                </div>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <!-- ===== STATS ===== -->
+    <section class="py-5 bg-warning text-dark">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-6 col-md-3 mb-3" data-aos="fade-up">
+                    <h2 class="display-4 fw-bold counter" data-target="120">0</h2>
+                    <p class="mb-0 fw-bold">ساعة تدريبية</p>
+                </div>
+                <div class="col-6 col-md-3 mb-3" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="display-4 fw-bold counter" data-target="10">0</h2>
+                    <p class="mb-0 fw-bold">أسابيع مكثفة</p>
+                </div>
+                <div class="col-6 col-md-3 mb-3" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="display-4 fw-bold counter" data-target="50">0</h2>
+                    <p class="mb-0 fw-bold">مختبر عملي</p>
+                </div>
+                <div class="col-6 col-md-3 mb-3" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="display-4 fw-bold counter" data-target="10">0</h2>
+                    <p class="mb-0 fw-bold">مشاريع احترافية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT BRIEF ===== -->
+    <section class="py-5" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <span class="badge bg-warning text-dark mb-2">من نحن</span>
+                    <h2 class="display-5 fw-bold">دبلوم الشبكات والأمن السيبراني</h2>
+                    <p class="lead text-muted">
+                        برنامج تدريبي متكامل يهدف إلى تخريج مهندس شبكات وأمن معلومات
+                        قادر على التعامل مع البنى التحتية للمؤسسات الكبرى.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> تدريب عملي على أجهزة Cisco الحقيقية</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> إدارة Windows Server و Linux</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> أمن المعلومات واختبار الاختراق</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> مشاريع تطبيقية تحاكي الواقع</li>
+                    </ul>
+                    <a href="about.html" class="btn btn-warning fw-bold text-dark mt-3">اقرأ المزيد <i class="fas fa-arrow-left me-1"></i></a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="About" class="img-fluid rounded-4 shadow" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="py-5 bg-light" id="features">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">ماذا ستتعلم؟</span>
+                <h2 class="display-5 fw-bold">محاور الدبلوم</h2>
+                <p class="text-muted">أربعة مسارات رئيسية تغطي سوق العمل</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="flip-up">
+                    <div class="card feature-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon bg-warning text-dark rounded-circle mx-auto mb-3">
+                                <i class="fas fa-server fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">الشبكات العمليّة</h5>
+                            <p class="card-text small text-muted">IP, Subnetting, VLAN, OSPF, EIGRP, BGP, ACL, NAT على أجهزة Cisco.</p>
+                            <a href="networking.html" class="btn btn-sm btn-outline-warning">استكشف <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="100">
+                    <div class="card feature-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon bg-success text-white rounded-circle mx-auto mb-3">
+                                <i class="fab fa-windows fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">Windows Server</h5>
+                            <p class="card-text small text-muted">AD DS, DNS, DHCP, GPO, File Server, Hyper-V, PowerShell.</p>
+                            <a href="windows-server.html" class="btn btn-sm btn-outline-success">استكشف <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card feature-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon bg-danger text-white rounded-circle mx-auto mb-3">
+                                <i class="fab fa-linux fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">Linux</h5>
+                            <p class="card-text small text-muted">أوامر، صلاحيات، SSH، Apache، Nginx، MariaDB، Bash، Firewall.</p>
+                            <a href="linux.html" class="btn btn-sm btn-outline-danger">استكشف <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="300">
+                    <div class="card feature-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                                <i class="fas fa-shield-halved fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">الأمن السيبراني</h5>
+                            <p class="card-text small text-muted">Nmap, Wireshark, Metasploit, Burp Suite, Firewall, VPN, SIEM.</p>
+                            <a href="cybersecurity.html" class="btn btn-sm btn-outline-primary">استكشف <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ROADMAP ===== -->
+    <section class="py-5" id="roadmap">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الخطة الزمنية</span>
+                <h2 class="display-5 fw-bold">خريطة التعلم</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="roadmap">
+                        <div class="roadmap-item" data-aos="fade-right">
+                            <div class="roadmap-icon bg-warning text-dark"><i class="fas fa-network-wired"></i></div>
+                            <div class="roadmap-content bg-white p-4 rounded-4 shadow-sm">
+                                <span class="badge bg-warning text-dark mb-2">الأسبوع 1-2</span>
+                                <h5>أساسيات الشبكات و Cisco</h5>
+                                <p class="small text-muted mb-0">OSI, TCP/IP, IP Addressing, Subnetting, VLAN, Trunk, Port Security</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item" data-aos="fade-left">
+                            <div class="roadmap-icon bg-success text-white"><i class="fab fa-windows"></i></div>
+                            <div class="roadmap-content bg-white p-4 rounded-4 shadow-sm">
+                                <span class="badge bg-success mb-2">الأسبوع 3-4</span>
+                                <h5>Windows Server & Active Directory</h5>
+                                <p class="small text-muted mb-0">Installation, AD DS, DNS, DHCP, GPO, File Server, PowerShell</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item" data-aos="fade-right">
+                            <div class="roadmap-icon bg-danger text-white"><i class="fas fa-shield-halved"></i></div>
+                            <div class="roadmap-content bg-white p-4 rounded-4 shadow-sm">
+                                <span class="badge bg-danger mb-2">الأسبوع 5-6</span>
+                                <h5>الأمن السيبراني واختبار الاختراق</h5>
+                                <p class="small text-muted mb-0">Nmap, Wireshark, Hydra, Metasploit, Firewall, VPN, Incident Response</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item" data-aos="fade-left">
+                            <div class="roadmap-icon bg-primary text-white"><i class="fas fa-project-diagram"></i></div>
+                            <div class="roadmap-content bg-white p-4 rounded-4 shadow-sm">
+                                <span class="badge bg-primary mb-2">الأسبوع 7-10</span>
+                                <h5>المشاريع التكاملية</h5>
+                                <p class="small text-muted mb-0">Enterprise Network, Hospital, University, VPN, SOC Lab, Cyber Range</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED LABS ===== -->
+    <section class="py-5 bg-light" id="labs">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">مختبرات مميزة</span>
+                <h2 class="display-5 fw-bold">أحدث المختبرات العملية</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;" />
+                        <div class="card-body">
+                            <span class="badge bg-warning text-dark mb-2">Lab 12</span>
+                            <h5 class="card-title">تقسيم الشبكات VLAN</h5>
+                            <p class="small text-muted">تطبيق VLAN 10 و 20 على سويتش Cisco مع Trunk و Inter-VLAN Routing.</p>
+                            <a href="labs.html" class="btn btn-sm btn-outline-warning">تفاصيل <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;" />
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Lab 24</span>
+                            <h5 class="card-title">Domain Controller</h5>
+                            <p class="small text-muted">رفع Active Directory وربط أجهزة العميل بالدومين وتطبيق GPO.</p>
+                            <a href="labs.html" class="btn btn-sm btn-outline-success">تفاصيل <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;" />
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">Lab 38</span>
+                            <h5 class="card-title">اختبار اختراق الشبكة</h5>
+                            <p class="small text-muted">استخدام Nmap و Metasploit لاستغلال ثغرات في بيئة معزولة.</p>
+                            <a href="labs.html" class="btn btn-sm btn-outline-danger">تفاصيل <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section class="py-5" id="certifications">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الشهادات الاحترافية</span>
+                <h2 class="display-5 fw-bold">المسار الاحترافي</h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3 col-6" data-aos="flip-left">
+                    <div class="cert-card text-center p-3 bg-white shadow-sm rounded-4">
+                        <img src="https://images.credly.com/size/340x340/images/70d71df5-f3c7-4327-8c30-1d3f6d7b1e6c/CCNA.png" alt="CCNA" class="img-fluid mb-2" style="height:60px;" />
+                        <h6>CCNA</h6>
+                        <small class="text-muted">Cisco</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="100">
+                    <div class="cert-card text-center p-3 bg-white shadow-sm rounded-4">
+                        <img src="https://images.credly.com/size/340x340/images/74790a75-8451-400a-8536-92d792c5184a/CompTIA_Security_2B.png" alt="Security+" class="img-fluid mb-2" style="height:60px;" />
+                        <h6>Security+</h6>
+                        <small class="text-muted">CompTIA</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="200">
+                    <div class="cert-card text-center p-3 bg-white shadow-sm rounded-4">
+                        <img src="https://images.credly.com/size/340x340/images/d73abebc-85c9-4a63-bf1e-58ee8868928d/CEH_Logo.png" alt="CEH" class="img-fluid mb-2" style="height:60px;" />
+                        <h6>CEH</h6>
+                        <small class="text-muted">EC-Council</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="300">
+                    <div class="cert-card text-center p-3 bg-white shadow-sm rounded-4">
+                        <img src="https://www.offsec.com/wp-content/uploads/2021/10/oscp.png" alt="OSCP" class="img-fluid mb-2" style="height:60px;" />
+                        <h6>OSCP</h6>
+                        <small class="text-muted">Offensive Security</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="py-5 bg-light" id="testimonials">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">آراء الطلاب</span>
+                <h2 class="display-5 fw-bold">ماذا قالوا عنا؟</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Student" class="rounded-circle" width="50" height="50" />
+                            <div>
+                                <h6 class="mb-0">أحمد محمد</h6>
+                                <small class="text-muted">مهندس شبكات</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"الدبلوم غير مسيرتي المهنية، التدريب العملي على Cisco كان ممتازاً."</p>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop&crop=face" alt="Student" class="rounded-circle" width="50" height="50" />
+                            <div>
+                                <h6 class="mb-0">سارة خالد</h6>
+                                <small class="text-muted">محلل أمن سيبراني</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"جزء اختبار الاختراق والأدوات كان عميقاً جداً، أنصح به بشدة."</p>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Student" class="rounded-circle" width="50" height="50" />
+                            <div>
+                                <h6 class="mb-0">محمد العتيبي</h6>
+                                <small class="text-muted">مسؤول أنظمة</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"الجزء الخاص ب Windows Server و Linux ساعدني في تطوير مهاراتي بشكل كبير."</p>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script>
+        // ===== PRELOADER =====
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 1000);
+        });
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ===== TYPING EFFECT =====
+        const typingElement = document.getElementById('typingText');
+        const phrases = ['و السيرفرات', 'و الأمن السيبراني', 'و اختبار الاختراق'];
+        let phraseIndex = 0,
+            charIndex = 0,
+            isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            if (!isDeleting && charIndex === currentPhrase.length) { isDeleting = true;
+                setTimeout(typeEffect, 2000); return; }
+            if (isDeleting && charIndex === 0) { isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeEffect, 500); return; }
+            setTimeout(typeEffect, isDeleting ? 50 : 80);
+        }
+        typeEffect();
+
+        // ===== COUNTERS =====
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 60;
+                    const update = () => {
+                        current += increment;
+                        if (current >= target) { entry.target.textContent = target; return; }
+                        entry.target.textContent = Math.round(current);
+                        requestAnimationFrame(update);
+                    };
+                    update();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObserver.observe(c));
+
+        // ===== DARK MODE =====
+        const darkToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // ===== AOS =====
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

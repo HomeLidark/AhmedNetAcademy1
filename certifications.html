@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الشهادات المهنية - أكاديمية أحمد الحداد</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* ===== GENERAL ===== */
+        :root {
+            --primary: #0d6efd;
+            --dark: #0f172a;
+            --gold: #ffc107;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Cairo', 'Poppins', sans-serif; padding-top: 70px; overflow-x: hidden; }
+
+        /* ===== NAVBAR ===== */
+        #mainNav {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.2);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.1);
+        }
+        #mainNav .navbar-brand { font-size: 1.4rem; font-weight: 700; }
+        #mainNav .navbar-brand .text-warning { color: #ffc107 !important; }
+        #mainNav .nav-link { font-weight: 500; font-size: 0.9rem; padding: 0.5rem 1rem !important; border-radius: 8px; transition: all 0.3s; }
+        #mainNav .nav-link:hover, #mainNav .nav-link.active { color: #ffc107 !important; background: rgba(255, 193, 7, 0.1); }
+
+        /* ===== CERTIFICATION CARDS ===== */
+        .cert-card {
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+            height: 100%;
+        }
+        .cert-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffc107;
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.15);
+        }
+        .cert-card .cert-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .cert-card .cert-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .cert-card .cert-badge.cisco { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd; }
+        .cert-card .cert-badge.comptia { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+        .cert-card .cert-badge.eccouncil { background: #6610f220; color: #6610f2; border: 1px solid #6610f2; }
+        .cert-card .cert-badge.offsec { background: #0f172a20; color: #0f172a; border: 1px solid #0f172a; }
+        .cert-card .cert-badge.microsoft { background: #20c99720; color: #20c997; border: 1px solid #20c997; }
+        .cert-card .cert-badge.amazon { background: #f59e0b20; color: #856404; border: 1px solid #f59e0b; }
+        .cert-card .cert-badge.azure { background: #0ea5e920; color: #0ea5e9; border: 1px solid #0ea5e9; }
+
+        /* ===== ROADMAP ===== */
+        .roadmap-cert {
+            position: relative;
+            padding-right: 30px;
+            border-right: 3px solid #ffc107;
+        }
+        .roadmap-cert::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #ffc107;
+            border-radius: 50%;
+            border: 3px solid #0f172a;
+        }
+        .roadmap-cert .step-number {
+            color: #ffc107;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode { background: #121826; color: #e2e8f0; }
+        body.dark-mode .bg-light { background: #1a2332 !important; }
+        body.dark-mode .card { background: #1e293b !important; color: #e2e8f0 !important; }
+        body.dark-mode .card .text-muted { color: #94a3b8 !important; }
+        body.dark-mode .bg-white { background: #1e293b !important; }
+        body.dark-mode .cert-card { background: #1e293b !important; border-color: #334155; }
+        body.dark-mode .cert-card:hover { border-color: #ffc107; }
+        body.dark-mode #mainNav { background: rgba(10,15,26,0.98) !important; }
+        body.dark-mode .roadmap-cert::before { border-color: #1e293b; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.3s; border-radius: 50%;
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) { .hero-section { min-height: 90vh; text-align: center; } }
+        @media (max-width: 576px) { .hero-section h1 { font-size: 2.2rem; } #backToTop { width: 40px; height: 40px; bottom: 15px; right: 15px; } }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" class="btn btn-warning"><i class="fas fa-chevron-up"></i></button>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="py-5" style="background: linear-gradient(135deg, #0f172a 0%, #1a0a0a 50%, #0f172a 100%); margin-top: 56px;">
+        <div class="container py-4 text-white text-center" data-aos="fade-up">
+            <span class="badge bg-warning text-dark mb-3 fs-6">🏆 الشهادات المهنية</span>
+            <h1 class="display-4 fw-bold">مسارات <span class="text-warning">الشهادات</span></h1>
+            <p class="lead opacity-75">
+                خريطة طريقك نحو <span class="text-warning">الاحتراف</span> في الشبكات والأمن السيبراني
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ROADMAP ===== -->
+    <section class="py-5" id="roadmap">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الخريطة</span>
+                <h2 class="display-5 fw-bold">🗺️ خريطة الشهادات</h2>
+                <p class="text-muted">المسار الاحترافي من المبتدئ إلى الخبير</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- مسار الشبكات -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-network-wired me-2"></i> مسار الشبكات
+                        </div>
+                        <div class="card-body">
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">01</span>
+                                <h6 class="fw-bold">CCST <small class="text-muted">(Cisco Certified Support Technician)</small></h6>
+                                <p class="small text-muted mb-0">أساسيات الشبكات والمفاهيم الأساسية.</p>
+                            </div>
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">02</span>
+                                <h6 class="fw-bold">CCNA <small class="text-muted">(Cisco Certified Network Associate)</small></h6>
+                                <p class="small text-muted mb-0">أهم شهادة للشبكات: IP، Subnetting، VLAN، Routing Protocols.</p>
+                            </div>
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">03</span>
+                                <h6 class="fw-bold">CCNP <small class="text-muted">(Cisco Certified Network Professional)</small></h6>
+                                <p class="small text-muted mb-0">شبكات متقدمة: OSPF، BGP، MPLS، SD-WAN، Automation.</p>
+                            </div>
+                            <div class="roadmap-cert">
+                                <span class="step-number">04</span>
+                                <h6 class="fw-bold">CCIE <small class="text-muted">(Cisco Certified Internetwork Expert)</small></h6>
+                                <p class="small text-muted mb-0">أعلى شهادة في الشبكات - خبير معتمد.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مسار الأمن السيبراني -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-danger text-white">
+                            <i class="fas fa-shield-halved me-2"></i> مسار الأمن السيبراني
+                        </div>
+                        <div class="card-body">
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">01</span>
+                                <h6 class="fw-bold">Security+ <small class="text-muted">(CompTIA)</small></h6>
+                                <p class="small text-muted mb-0">أساسيات الأمن السيبراني، التشفير، التهديدات.</p>
+                            </div>
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">02</span>
+                                <h6 class="fw-bold">CEH <small class="text-muted">(Certified Ethical Hacker)</small></h6>
+                                <p class="small text-muted mb-0">اختبار الاختراق وأدوات الهجوم الأخلاقي.</p>
+                            </div>
+                            <div class="roadmap-cert mb-3">
+                                <span class="step-number">03</span>
+                                <h6 class="fw-bold">PNPT <small class="text-muted">(Practical Network Penetration Tester)</small></h6>
+                                <p class="small text-muted mb-0">اختبار اختراق عملي مع تطبيقات واقعية.</p>
+                            </div>
+                            <div class="roadmap-cert">
+                                <span class="step-number">04</span>
+                                <h6 class="fw-bold">OSCP <small class="text-muted">(Offensive Security Certified Professional)</small></h6>
+                                <p class="small text-muted mb-0">أصعب وأشهر شهادة في اختبار الاختراق العملي.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ALL CERTIFICATIONS ===== -->
+    <section class="py-5 bg-light" id="all-certs">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">جميع الشهادات</span>
+                <h2 class="display-5 fw-bold">📜 قائمة الشهادات</h2>
+                <p class="text-muted">الشهادات التي يمكنك الحصول عليها خلال الدبلوم وبعده</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- CCNA -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up">
+                    <div class="cert-card">
+                        <span class="cert-icon">🟦</span>
+                        <h5 class="fw-bold">CCNA</h5>
+                        <p class="small text-muted">Cisco Certified Network Associate</p>
+                        <div>
+                            <span class="cert-badge cisco">Cisco</span>
+                            <span class="cert-badge microsoft">مستوى متوسط</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://images.credly.com/size/340x340/images/70d71df5-f3c7-4327-8c30-1d3f6d7b1e6c/CCNA.png" alt="CCNA" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CCNP -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="cert-card">
+                        <span class="cert-icon">🟦</span>
+                        <h5 class="fw-bold">CCNP</h5>
+                        <p class="small text-muted">Cisco Certified Network Professional</p>
+                        <div>
+                            <span class="cert-badge cisco">Cisco</span>
+                            <span class="cert-badge amazon">متقدم</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://images.credly.com/size/340x340/images/4882d8c6-3973-49c7-8f10-9fa1ab79e20b/ccnp-enterprise.png" alt="CCNP" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security+ -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="cert-card">
+                        <span class="cert-icon">🟥</span>
+                        <h5 class="fw-bold">Security+</h5>
+                        <p class="small text-muted">CompTIA Security+</p>
+                        <div>
+                            <span class="cert-badge comptia">CompTIA</span>
+                            <span class="cert-badge microsoft">مستوى مبتدئ</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://images.credly.com/size/340x340/images/74790a75-8451-400a-8536-92d792c5184a/CompTIA_Security_2B.png" alt="Security+" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CEH -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="300">
+                    <div class="cert-card">
+                        <span class="cert-icon">🟪</span>
+                        <h5 class="fw-bold">CEH</h5>
+                        <p class="small text-muted">Certified Ethical Hacker</p>
+                        <div>
+                            <span class="cert-badge eccouncil">EC-Council</span>
+                            <span class="cert-badge amazon">متوسط</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://images.credly.com/size/340x340/images/d73abebc-85c9-4a63-bf1e-58ee8868928d/CEH_Logo.png" alt="CEH" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OSCP -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="400">
+                    <div class="cert-card">
+                        <span class="cert-icon">⬛</span>
+                        <h5 class="fw-bold">OSCP</h5>
+                        <p class="small text-muted">Offensive Security Certified Professional</p>
+                        <div>
+                            <span class="cert-badge offsec">Offensive Security</span>
+                            <span class="cert-badge cisco">خبير</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://www.offsec.com/wp-content/uploads/2021/10/oscp.png" alt="OSCP" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Microsoft Azure -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="500">
+                    <div class="cert-card">
+                        <span class="cert-icon">☁️</span>
+                        <h5 class="fw-bold">Azure Administrator</h5>
+                        <p class="small text-muted">Microsoft Certified: Azure Administrator</p>
+                        <div>
+                            <span class="cert-badge azure">Azure</span>
+                            <span class="cert-badge microsoft">Microsoft</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Azure" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="600">
+                    <div class="cert-card">
+                        <span class="cert-icon">☁️</span>
+                        <h5 class="fw-bold">AWS Solutions Architect</h5>
+                        <p class="small text-muted">AWS Certified Solutions Architect</p>
+                        <div>
+                            <span class="cert-badge amazon">AWS</span>
+                            <span class="cert-badge amazon">متقدم</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://d1.awsstatic.com/training-and-certification/certification-badges/AWS-Certified-Solutions-Architect-Associate_badge.5f0ab0c3d654b6d94e3fb91e5fe60733.png" alt="AWS" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCSA -->
+                <div class="col-md-6 col-lg-4" data-aos="flip-up" data-aos-delay="700">
+                    <div class="cert-card">
+                        <span class="cert-icon">🪟</span>
+                        <h5 class="fw-bold">MCSA</h5>
+                        <p class="small text-muted">Microsoft Certified Solutions Associate</p>
+                        <div>
+                            <span class="cert-badge microsoft">Microsoft</span>
+                            <span class="cert-badge microsoft">مستوى متوسط</span>
+                        </div>
+                        <div class="mt-2">
+                            <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="MCSA" style="height:60px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RECOMMENDED PATH ===== -->
+    <section class="py-5" id="recommended">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">المسار الموصى به</span>
+                <h2 class="display-5 fw-bold">🎯 مسار الشهادات الموصى به</h2>
+                <p class="text-muted">الترتيب الأمثل للحصول على الشهادات</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3 p-3 bg-light rounded-4">
+                                <span class="badge bg-primary rounded-pill me-3 fs-6">1</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">CCST أو Security+</h6>
+                                    <small class="text-muted">أساسيات الشبكات أو الأمن</small>
+                                </div>
+                                <span class="badge bg-success ms-auto">3 شهور</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3 p-3 bg-light rounded-4">
+                                <span class="badge bg-primary rounded-pill me-3 fs-6">2</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">CCNA</h6>
+                                    <small class="text-muted">شبكات سيسكو المتوسطة</small>
+                                </div>
+                                <span class="badge bg-success ms-auto">4 شهور</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3 p-3 bg-light rounded-4">
+                                <span class="badge bg-primary rounded-pill me-3 fs-6">3</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">CEH</h6>
+                                    <small class="text-muted">اختبار الاختراق الأخلاقي</small>
+                                </div>
+                                <span class="badge bg-success ms-auto">3 شهور</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3 p-3 bg-light rounded-4">
+                                <span class="badge bg-primary rounded-pill me-3 fs-6">4</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">CCNP / Azure / AWS</h6>
+                                    <small class="text-muted">تخصص متقدم حسب المسار</small>
+                                </div>
+                                <span class="badge bg-success ms-auto">6 شهور</span>
+                            </div>
+                            <div class="d-flex align-items-center p-3 bg-warning text-dark rounded-4">
+                                <span class="badge bg-danger rounded-pill me-3 fs-6">5</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">OSCP</h6>
+                                    <small>أعلى شهادة في اختبار الاختراق العملي</small>
+                                </div>
+                                <span class="badge bg-danger ms-auto">6+ شهور</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIPS ===== -->
+    <section class="py-5 bg-light" id="tips">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">نصائح</span>
+                <h2 class="display-5 fw-bold">💡 نصائح للحصول على الشهادات</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                        <h5 class="fw-bold">التطبيق العملي</h5>
+                        <p class="small text-muted">لا تكتفي بالنظري، طبق كل ما تتعلمه على أجهزة فعلية أو محاكيات.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                        <h5 class="fw-bold">التنظيم والوقت</h5>
+                        <p class="small text-muted">خصص وقتاً يومياً للدراسة، واستخدم تقنية البومودورو للحفاظ على التركيز.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100 text-center p-4">
+                        <i class="fas fa-users fa-3x text-danger mb-3"></i>
+                        <h5 class="fw-bold">المجتمع</h5>
+                        <p class="small text-muted">انضم لمجموعات الدراسة، وشارك في المنتديات، وتعلم من تجارب الآخرين.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script>
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ===== DARK MODE =====
+        const darkToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // ===== AOS =====
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

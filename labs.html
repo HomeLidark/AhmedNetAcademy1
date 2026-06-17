@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المختبرات - أكاديمية الشبكات والأمن السيبراني</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .lab-card {
+            border-right: 4px solid #0d6efd;
+            transition: all 0.3s ease;
+        }
+        .lab-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        .lab-card .lab-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0d6efd;
+            opacity: 0.2;
+            position: absolute;
+            left: 15px;
+            top: 10px;
+        }
+        .lab-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .lab-tag.network { background: #0d6efd20; color: #0d6efd; }
+        .lab-tag.windows { background: #20c99720; color: #20c997; }
+        .lab-tag.linux { background: #ffc10720; color: #856404; }
+        .lab-tag.security { background: #dc354520; color: #dc3545; }
+        .lab-tag.project { background: #6610f220; color: #6610f2; }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="py-5" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); margin-top: 56px;">
+        <div class="container py-4 text-white" data-aos="fade-up">
+            <span class="badge bg-primary mb-3 fs-6">🧪 المختبرات</span>
+            <h1 class="display-4 fw-bold">المختبرات العملية</h1>
+            <p class="lead opacity-75">50+ مختبر عملي لتطبيق كل ما تتعلمه</p>
+        </div>
+    </section>
+
+    <!-- ===== LABS FILTER ===== -->
+    <section class="py-3 bg-light">
+        <div class="container">
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <button class="btn btn-sm btn-primary" onclick="filterLabs('all')">الكل</button>
+                <button class="btn btn-sm btn-outline-primary" onclick="filterLabs('network')">الشبكات</button>
+                <button class="btn btn-sm btn-outline-success" onclick="filterLabs('windows')">Windows</button>
+                <button class="btn btn-sm btn-outline-warning" onclick="filterLabs('linux')">Linux</button>
+                <button class="btn btn-sm btn-outline-danger" onclick="filterLabs('security')">الأمن السيبراني</button>
+                <button class="btn btn-sm btn-outline-project" style="border-color:#6610f2;color:#6610f2;" onclick="filterLabs('project')">مشاريع</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LABS LIST ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4" id="labsContainer">
+                <!-- Lab 1 -->
+                <div class="col-md-6 col-lg-4" data-category="network">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#01</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">سهل</span>
+                            <h5 class="fw-bold">Subnetting Practice</h5>
+                            <p class="small text-muted">تقسيم شبكة 192.168.10.0/24 إلى 4 شبكات فرعية.</p>
+                            <div>
+                                <span class="lab-tag network">IP</span>
+                                <span class="lab-tag network">Subnetting</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 2 -->
+                <div class="col-md-6 col-lg-4" data-category="network">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#02</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">VLAN & Trunk Configuration</h5>
+                            <p class="small text-muted">إنشاء VLAN 10 و 20 وتكوين Trunk و Inter-VLAN Routing.</p>
+                            <div>
+                                <span class="lab-tag network">VLAN</span>
+                                <span class="lab-tag network">Trunk</span>
+                                <span class="lab-tag network">Cisco</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 3 -->
+                <div class="col-md-6 col-lg-4" data-category="network">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#03</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">OSPF Multi-Area</h5>
+                            <p class="small text-muted">تكوين OSPF على 3 راوترات مع مناطق متعددة.</p>
+                            <div>
+                                <span class="lab-tag network">OSPF</span>
+                                <span class="lab-tag network">Routing</span>
+                                <span class="lab-tag network">Cisco</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 4 -->
+                <div class="col-md-6 col-lg-4" data-category="network">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#04</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">EIGRP Configuration</h5>
+                            <p class="small text-muted">تكوين EIGRP على شبكة متوسطة مع توزيع المسارات.</p>
+                            <div>
+                                <span class="lab-tag network">EIGRP</span>
+                                <span class="lab-tag network">Routing</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 5 -->
+                <div class="col-md-6 col-lg-4" data-category="network">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#05</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">ACL & NAT</h5>
+                            <p class="small text-muted">تكوين Access Lists و NAT على راوتر Cisco.</p>
+                            <div>
+                                <span class="lab-tag network">ACL</span>
+                                <span class="lab-tag network">NAT</span>
+                                <span class="lab-tag network">Cisco</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 6 -->
+                <div class="col-md-6 col-lg-4" data-category="windows">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#06</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">Active Directory Setup</h5>
+                            <p class="small text-muted">رفع Domain Controller وإنشاء مستخدمين ومجموعات.</p>
+                            <div>
+                                <span class="lab-tag windows">AD DS</span>
+                                <span class="lab-tag windows">Domain</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-success mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 7 -->
+                <div class="col-md-6 col-lg-4" data-category="windows">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#07</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">DNS & DHCP Server</h5>
+                            <p class="small text-muted">تثبيت DNS و DHCP وتكوين النطاقات والسجلات.</p>
+                            <div>
+                                <span class="lab-tag windows">DNS</span>
+                                <span class="lab-tag windows">DHCP</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-success mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 8 -->
+                <div class="col-md-6 col-lg-4" data-category="windows">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#08</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">Group Policy (GPO)</h5>
+                            <p class="small text-muted">تطبيق سياسات أمان وتخصيص على مجموعة مستخدمين.</p>
+                            <div>
+                                <span class="lab-tag windows">GPO</span>
+                                <span class="lab-tag windows">Security</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-success mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 9 -->
+                <div class="col-md-6 col-lg-4" data-category="linux">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#09</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">سهل</span>
+                            <h5 class="fw-bold">Linux Basics</h5>
+                            <p class="small text-muted">أوامر Linux الأساسية وإدارة المستخدمين والصلاحيات.</p>
+                            <div>
+                                <span class="lab-tag linux">Commands</span>
+                                <span class="lab-tag linux">Permissions</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-warning mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 10 -->
+                <div class="col-md-6 col-lg-4" data-category="linux">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#10</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">Apache & Nginx</h5>
+                            <p class="small text-muted">تثبيت وتكوين Apache و Nginx على Ubuntu.</p>
+                            <div>
+                                <span class="lab-tag linux">Apache</span>
+                                <span class="lab-tag linux">Nginx</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-warning mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 11 -->
+                <div class="col-md-6 col-lg-4" data-category="security">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#11</span>
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">متوسط</span>
+                            <h5 class="fw-bold">Network Scanning (Nmap)</h5>
+                            <p class="small text-muted">مسح الشبكة وتحديد الأجهزة والمنافذ المفتوحة.</p>
+                            <div>
+                                <span class="lab-tag security">Nmap</span>
+                                <span class="lab-tag security">Scanning</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-danger mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 12 -->
+                <div class="col-md-6 col-lg-4" data-category="security">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#12</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">Password Cracking</h5>
+                            <p class="small text-muted">استخدام Hydra و John the Ripper لاختبار كلمات المرور.</p>
+                            <div>
+                                <span class="lab-tag security">Hydra</span>
+                                <span class="lab-tag security">John</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-danger mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 13 -->
+                <div class="col-md-6 col-lg-4" data-category="security">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#13</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">Metasploit Exploitation</h5>
+                            <p class="small text-muted">استغلال ثغرة في نظام مستهدف باستخدام Metasploit.</p>
+                            <div>
+                                <span class="lab-tag security">Metasploit</span>
+                                <span class="lab-tag security">Exploit</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-danger mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 14 -->
+                <div class="col-md-6 col-lg-4" data-category="security">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#14</span>
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">صعب</span>
+                            <h5 class="fw-bold">SQL Injection (SQLMap)</h5>
+                            <p class="small text-muted">اختبار ثغرات حقن SQL في تطبيق ويب.</p>
+                            <div>
+                                <span class="lab-tag security">SQLMap</span>
+                                <span class="lab-tag security">Web</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-danger mt-3">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab 15 -->
+                <div class="col-md-6 col-lg-4" data-category="project">
+                    <div class="card border-0 shadow-sm h-100 lab-card position-relative">
+                        <span class="lab-number">#15</span>
+                        <div class="card-body">
+                            <span class="badge bg-project text-white mb-2" style="background:#6610f2;">مشروع</span>
+                            <h5 class="fw-bold">Enterprise Network Design</h5>
+                            <p class="small text-muted">تصميم شبكة متكاملة لشركة مع VLAN و Routing و ACL.</p>
+                            <div>
+                                <span class="lab-tag project">Design</span>
+                                <span class="lab-tag project">Integration</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-project mt-3" style="border-color:#6610f2;color:#6610f2;">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+
+        function filterLabs(category) {
+            const labs = document.querySelectorAll('#labsContainer .col-md-6');
+            labs.forEach(lab => {
+                if (category === 'all') {
+                    lab.style.display = 'block';
+                } else {
+                    if (lab.dataset.category === category) {
+                        lab.style.display = 'block';
+                    } else {
+                        lab.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+/* ============================================================
+   ROOT VARIABLES
+   ============================================================ */
+:root {
+    --primary: #0d6efd;
+    --primary-dark: #0a58ca;
+    --secondary: #6610f2;
+    --success: #20c997;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --dark: #0f172a;
+    --light-bg: #f8f9fa;
+    --text-dark: #212529;
+    --text-light: #f8f9fa;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    --radius: 20px;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* ===== الخلفية المثالية (تدرج لوني) ===== */
+    background: linear-gradient(145deg, #0f172a 0%, #1a2332 40%, #0f172a 100%);
+    font-family: 'Cairo', 'Poppins', sans-serif;
+    color: #e2e8f0;
+    overflow-x: hidden;
+    padding-top: 70px;
+    min-height: 100vh;
+}
+
+/* ===== إذا أردت صورة خلفية مع طبقة شفافة ===== */
+body.bg-image {
+    background: 
+        linear-gradient(rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.96)),
+        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop') center/cover fixed no-repeat;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#preloader .spinner-border {
+    width: 4rem;
+    height: 4rem;
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+#backToTop.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#mainNav {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(255, 193, 7, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+#mainNav .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+    color: #f8fafc !important;
+}
+#mainNav .navbar-brand:hover {
+    transform: scale(1.02);
+}
+
+#mainNav .navbar-brand .text-warning {
+    color: #ffc107 !important;
+    text-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+}
+
+#mainNav .nav-link {
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem !important;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.75) !important;
+    position: relative;
+}
+
+#mainNav .nav-link:hover,
+#mainNav .nav-link.active {
+    color: #ffc107 !important;
+    background: rgba(255, 193, 7, 0.08);
+    transform: translateY(-1px);
+}
+
+#mainNav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 30%;
+    width: 40%;
+    height: 2px;
+    background: #ffc107;
+    border-radius: 10px;
+}
+
+/* ===== أزرار جانبية ===== */
+#mainNav .btn-warning {
+    background: linear-gradient(135deg, #ffc107, #f59e0b);
+    border: none;
+    color: #0f172a !important;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+#mainNav .btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+}
+
+#mainNav .btn-outline-light {
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease;
+}
+#mainNav .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffc107;
+    color: #ffc107 !important;
+}
+
+#mainNav .btn-outline-secondary {
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s ease;
+}
+#mainNav .btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffc107;
+    color: #ffc107 !important;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    background: transparent; /* الخلفية من body */
+    overflow: hidden;
+}
+
+.hero-section .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 193, 7, 0.05), transparent 70%);
+    pointer-events: none;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    color: #f8fafc !important;
+}
+
+.typing-text::after {
+    content: '|';
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ============================================================
+   CARDS & SECTIONS
+   ============================================================ */
+.card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    color: #e2e8f0 !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(255, 193, 7, 0.2) !important;
+}
+
+.card .text-muted {
+    color: #94a3b8 !important;
+}
+
+/* ============================================================
+   CERTIFICATIONS
+   ============================================================ */
+.cert-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.06) !important;
+    transition: var(--transition);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.cert-card:hover {
+    transform: scale(1.05);
+    border-color: #ffc107 !important;
+    box-shadow: 0 10px 40px rgba(255, 193, 7, 0.1) !important;
+}
+
+.cert-card h6 {
+    color: #f8fafc !important;
+}
+.cert-card .text-muted {
+    color: #94a3b8 !important;
+}
+
+/* ============================================================
+   ROADMAP
+   ============================================================ */
+.roadmap-content {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-right: 4px solid #ffc107 !important;
+}
+
+.roadmap-content h5 {
+    color: #f8fafc !important;
+}
+.roadmap-content .text-muted {
+    color: #94a3b8 !important;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    background: rgba(10, 15, 26, 0.98) !important;
+    border-top: 1px solid rgba(255, 193, 7, 0.08);
+}
+
+footer a {
+    transition: var(--transition);
+    color: #94a3b8 !important;
+}
+
+footer a:hover {
+    opacity: 1 !important;
+    color: #ffc107 !important;
+}
+
+footer .text-warning {
+    color: #ffc107 !important;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+body.dark-mode {
+    background: #080c16;
+}
+
+body.dark-mode .card {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+body.dark-mode .cert-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+body.dark-mode .roadmap-content {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+body.dark-mode #mainNav {
+    background: rgba(8, 12, 22, 0.98) !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: 90vh;
+        text-align: center;
+    }
+
+    .roadmap {
+        padding-right: 0;
+    }
+
+    .roadmap::before {
+        display: none;
+    }
+
+    .roadmap-item {
+        padding-right: 0;
+    }
+
+    .roadmap-icon {
+        position: relative;
+        right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+    }
+}

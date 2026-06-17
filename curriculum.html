@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المنهج الدراسي - أكاديمية أحمد الحداد</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        /* ===== تحسينات عامة ===== */
+        .curriculum-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1a0a2a 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .curriculum-header::before {
+            content: '📚';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.03;
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-10deg);
+        }
+        .curriculum-header .badge {
+            font-size: 1rem !important;
+            padding: 10px 24px !important;
+            border-radius: 50px !important;
+        }
+
+        /* ===== إحصائيات سريعة ===== */
+        .stats-mini {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .stats-mini .stat-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 15px 25px;
+            text-align: center;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+        .stats-mini .stat-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        .stats-mini .stat-item .number {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffc107;
+        }
+        .stats-mini .stat-item .label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: block;
+        }
+
+        /* ===== بطاقات الأسابيع ===== */
+        .week-accordion .accordion-item {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            border-radius: 20px !important;
+            margin-bottom: 20px !important;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .week-accordion .accordion-item:hover {
+            border-color: rgba(255, 193, 7, 0.2) !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        .week-accordion .accordion-button {
+            background: transparent !important;
+            color: #f8fafc !important;
+            padding: 20px 25px !important;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            border: none !important;
+        }
+        .week-accordion .accordion-button:not(.collapsed) {
+            background: rgba(255, 193, 7, 0.06) !important;
+            color: #ffc107 !important;
+        }
+        .week-accordion .accordion-button:not(.collapsed) .week-icon {
+            background: #ffc107 !important;
+            color: #0f172a !important;
+        }
+        .week-accordion .accordion-button::after {
+            filter: invert(1);
+            opacity: 0.5;
+        }
+        .week-accordion .accordion-button:not(.collapsed)::after {
+            filter: invert(1) brightness(1.5);
+        }
+        .week-accordion .accordion-body {
+            padding: 20px 25px !important;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* ===== أيقونة الأسبوع ===== */
+        .week-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffc107;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .week-badge {
+            font-size: 0.8rem !important;
+            padding: 4px 14px !important;
+            border-radius: 50px !important;
+        }
+        .week-badge.primary { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd; }
+        .week-badge.success { background: #20c99720; color: #20c997; border: 1px solid #20c997; }
+        .week-badge.warning { background: #ffc10720; color: #856404; border: 1px solid #ffc107; }
+        .week-badge.danger { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+        .week-badge.project { background: #6610f220; color: #6610f2; border: 1px solid #6610f2; }
+
+        /* ===== شريط التقدم ===== */
+        .progress-bar-custom {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-bar-custom .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #ffc107, #f59e0b);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        /* ===== قائمة المحتوى ===== */
+        .content-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .content-list li {
+            padding: 6px 0;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .content-list li:hover {
+            color: #f8fafc;
+            transform: translateX(-4px);
+        }
+        .content-list li i {
+            width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .content-list li .check { color: #20c997; }
+        .content-list li .book { color: #ffc107; }
+        .content-list li .code { color: #0d6efd; }
+        .content-list li .shield { color: #dc3545; }
+
+        /* ===== Tags ===== */
+        .topic-tag {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 2px;
+            transition: all 0.3s ease;
+        }
+        .topic-tag:hover {
+            transform: scale(1.05);
+        }
+        .topic-tag.network { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd30; }
+        .topic-tag.windows { background: #20c99720; color: #20c997; border: 1px solid #20c99730; }
+        .topic-tag.linux { background: #ffc10720; color: #856404; border: 1px solid #ffc10730; }
+        .topic-tag.security { background: #dc354520; color: #dc3545; border: 1px solid #dc354530; }
+        .topic-tag.project { background: #6610f220; color: #6610f2; border: 1px solid #6610f230; }
+        .topic-tag.tools { background: #0dcaf020; color: #0dcaf0; border: 1px solid #0dcaf030; }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode .week-accordion .accordion-item {
+            background: rgba(255, 255, 255, 0.02) !important;
+        }
+        body.dark-mode .stats-mini .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .week-accordion .accordion-button {
+                font-size: 0.9rem;
+                padding: 15px 18px !important;
+            }
+            .week-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .content-list li {
+                font-size: 0.85rem;
+            }
+            .stats-mini .stat-item {
+                padding: 10px 18px;
+                min-width: 90px;
+            }
+            .stats-mini .stat-item .number {
+                font-size: 1.4rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .curriculum-header h1 {
+                font-size: 2rem !important;
+            }
+            .week-accordion .accordion-button {
+                font-size: 0.8rem;
+                padding: 12px 14px !important;
+                flex-wrap: wrap;
+            }
+            .week-accordion .accordion-body {
+                padding: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-graduation-cap text-warning me-2"></i>
+                أكاديمية <span class="text-warning">أحمد الحداد</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="curriculum.html">📚 المنهج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                    <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                    <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+                <div class="d-flex gap-2 align-items-center">
+                    <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                        <i class="fas fa-user-tie me-1"></i> المدرب
+                    </a>
+                    <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                        <i class="fas fa-sign-in-alt me-1"></i> دخول
+                    </a>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <section class="curriculum-header py-5" style="margin-top:56px;">
+        <div class="container py-4 text-white text-center" data-aos="fade-up">
+            <span class="badge bg-warning text-dark mb-3 fs-6">📚 الخطة الدراسية</span>
+            <h1 class="display-4 fw-bold">المنهج <span class="text-warning">الكامل</span></h1>
+            <p class="lead opacity-75">10 أسابيع مكثفة - من الصفر إلى الاحتراف</p>
+
+            <!-- ===== إحصائيات سريعة ===== -->
+            <div class="stats-mini">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="50">
+                    <span class="number">10</span>
+                    <span class="label">أسابيع مكثفة</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <span class="number">120+</span>
+                    <span class="label">ساعة تدريب</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="150">
+                    <span class="number">50+</span>
+                    <span class="label">مختبر عملي</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="number">10</span>
+                    <span class="label">مشاريع احترافية</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="250">
+                    <span class="number">15+</span>
+                    <span class="label">شهادات معتمدة</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CURRICULUM ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+
+                    <div class="week-accordion accordion" id="curriculumAccordion">
+
+                        <!-- ===== الأسبوع 1 ===== -->
+                        <div class="accordion-item" data-aos="fade-up">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week1">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-network-wired"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge primary me-2">الأسبوع 1</span>
+                                            <span class="fw-bold">أساسيات الشبكات و OSI</span>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">بداية</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week1" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>مقدمة في الشبكات</li>
+                                                <li><i class="fas fa-check-circle check"></i>نموذج OSI (7 طبقات)</li>
+                                                <li><i class="fas fa-check-circle check"></i>نموذج TCP/IP</li>
+                                                <li><i class="fas fa-check-circle check"></i>أنواع الشبكات (LAN, WAN, MAN)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت Packet Tracer</li>
+                                                <li><i class="fas fa-check-circle check"></i>ربط جهازين مباشرة</li>
+                                                <li><i class="fas fa-check-circle check"></i>استخدام Ping و Tracert</li>
+                                                <li><i class="fas fa-check-circle check"></i>تحليل حزم باستخدام Wireshark</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag network">OSI</span>
+                                        <span class="topic-tag network">TCP/IP</span>
+                                        <span class="topic-tag tools">Ping</span>
+                                        <span class="topic-tag tools">Wireshark</span>
+                                        <span class="topic-tag tools">Packet Tracer</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:10%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 2 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="50">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week2">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-hashtag"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge primary me-2">الأسبوع 2</span>
+                                            <span class="fw-bold">IP Addressing & Subnetting</span>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">أساسي</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>IPv4 vs IPv6</li>
+                                                <li><i class="fas fa-check-circle check"></i>Classful vs Classless</li>
+                                                <li><i class="fas fa-check-circle check"></i>Subnet Mask و CIDR</li>
+                                                <li><i class="fas fa-check-circle check"></i>VLSM (تقسيم متغير)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>حساب الشبكات يدوياً</li>
+                                                <li><i class="fas fa-check-circle check"></i>تطبيق IP على أجهزة Cisco</li>
+                                                <li><i class="fas fa-check-circle check"></i>تقسيم شبكة /24 إلى 4 شبكات</li>
+                                                <li><i class="fas fa-check-circle check"></i>استخدام آلة حاسبة Subnetting</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag network">IPv4</span>
+                                        <span class="topic-tag network">Subnetting</span>
+                                        <span class="topic-tag network">CIDR</span>
+                                        <span class="topic-tag network">VLSM</span>
+                                        <span class="topic-tag network">Cisco CLI</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:20%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 3 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week3">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-diagram-project"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge primary me-2">الأسبوع 3</span>
+                                            <span class="fw-bold">Switching & VLAN</span>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">متوسط</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>كيف يعمل الـ Switch</li>
+                                                <li><i class="fas fa-check-circle check"></i>MAC Address Table</li>
+                                                <li><i class="fas fa-check-circle check"></i>VLAN (Virtual LAN)</li>
+                                                <li><i class="fas fa-check-circle check"></i>Trunk و Inter-VLAN Routing</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>إنشاء VLAN 10 و 20</li>
+                                                <li><i class="fas fa-check-circle check"></i>تكوين Trunk بين سويتشين</li>
+                                                <li><i class="fas fa-check-circle check"></i>Router-on-a-stick</li>
+                                                <li><i class="fas fa-check-circle check"></i>Port Security</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag network">VLAN</span>
+                                        <span class="topic-tag network">Trunk</span>
+                                        <span class="topic-tag network">Inter-VLAN</span>
+                                        <span class="topic-tag network">Port Security</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:30%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 4 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="150">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week4">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-route"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge success me-2">الأسبوع 4</span>
+                                            <span class="fw-bold">Routing Protocols (OSPF, EIGRP)</span>
+                                        </div>
+                                        <span class="badge bg-success rounded-pill">متقدم</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>Static vs Dynamic Routing</li>
+                                                <li><i class="fas fa-check-circle check"></i>OSPF (Link-State)</li>
+                                                <li><i class="fas fa-check-circle check"></i>EIGRP (Hybrid)</li>
+                                                <li><i class="fas fa-check-circle check"></i>مقارنة بين البروتوكولات</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تكوين OSPF على 3 راوترات</li>
+                                                <li><i class="fas fa-check-circle check"></i>تكوين EIGRP</li>
+                                                <li><i class="fas fa-check-circle check"></i>مراقبة جداول التوجيه</li>
+                                                <li><i class="fas fa-check-circle check"></i>استكشاف الأخطاء</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag network">OSPF</span>
+                                        <span class="topic-tag network">EIGRP</span>
+                                        <span class="topic-tag network">Routing</span>
+                                        <span class="topic-tag network">Cisco</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:40%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 5 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week5">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fab fa-windows"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge warning me-2">الأسبوع 5</span>
+                                            <span class="fw-bold">Windows Server - Installation & AD DS</span>
+                                        </div>
+                                        <span class="badge bg-warning text-dark rounded-pill">متوسط</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week5" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>إصدارات Windows Server</li>
+                                                <li><i class="fas fa-check-circle check"></i>ما هو Domain Controller</li>
+                                                <li><i class="fas fa-check-circle check"></i>Active Directory Schema</li>
+                                                <li><i class="fas fa-check-circle check"></i>Forest, Tree, Domain</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت Windows Server 2022</li>
+                                                <li><i class="fas fa-check-circle check"></i>رفع AD DS</li>
+                                                <li><i class="fas fa-check-circle check"></i>إنشاء مستخدمين ومجموعات</li>
+                                                <li><i class="fas fa-check-circle check"></i>ربط جهاز عميل بالدومين</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag windows">AD DS</span>
+                                        <span class="topic-tag windows">Domain Controller</span>
+                                        <span class="topic-tag windows">Forest</span>
+                                        <span class="topic-tag windows">Users</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:50%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 6 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="250">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week6">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge warning me-2">الأسبوع 6</span>
+                                            <span class="fw-bold">DNS, DHCP, GPO</span>
+                                        </div>
+                                        <span class="badge bg-warning text-dark rounded-pill">متقدم</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>DNS Records (A, CNAME, MX)</li>
+                                                <li><i class="fas fa-check-circle check"></i>DHCP Scope & Reservation</li>
+                                                <li><i class="fas fa-check-circle check"></i>Group Policy Objects</li>
+                                                <li><i class="fas fa-check-circle check"></i>مستويات GPO (Local, Domain, OU)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت DNS و DHCP</li>
+                                                <li><i class="fas fa-check-circle check"></i>إنشاء Forward/Reverse Lookup</li>
+                                                <li><i class="fas fa-check-circle check"></i>تطبيق GPO (أمان + تخصيص)</li>
+                                                <li><i class="fas fa-check-circle check"></i>gpupdate و gpresult</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag windows">DNS</span>
+                                        <span class="topic-tag windows">DHCP</span>
+                                        <span class="topic-tag windows">GPO</span>
+                                        <span class="topic-tag windows">PowerShell</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:60%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 7 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week7">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fab fa-linux"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge danger me-2">الأسبوع 7</span>
+                                            <span class="fw-bold">Linux Administration</span>
+                                        </div>
+                                        <span class="badge bg-danger rounded-pill">متوسط</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>توزيعات Linux (Ubuntu, Rocky, Kali)</li>
+                                                <li><i class="fas fa-check-circle check"></i>نظام الملفات (ext4, xfs)</li>
+                                                <li><i class="fas fa-check-circle check"></i>صلاحيات الملفات (chmod, chown)</li>
+                                                <li><i class="fas fa-check-circle check"></i>خدمات systemd</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت Ubuntu Server</li>
+                                                <li><i class="fas fa-check-circle check"></i>الأوامر الأساسية (ls, cd, cp, mv)</li>
+                                                <li><i class="fas fa-check-circle check"></i>إدارة المستخدمين</li>
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت Apache و Nginx</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag linux">Ubuntu</span>
+                                        <span class="topic-tag linux">Commands</span>
+                                        <span class="topic-tag linux">Permissions</span>
+                                        <span class="topic-tag linux">Apache</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:70%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 8 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="350">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week8">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-shield-halved"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge danger me-2">الأسبوع 8</span>
+                                            <span class="fw-bold">Cyber Security & Pentesting</span>
+                                        </div>
+                                        <span class="badge bg-danger rounded-pill">متقدم</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>CIA Triad</li>
+                                                <li><i class="fas fa-check-circle check"></i>OWASP Top 10</li>
+                                                <li><i class="fas fa-check-circle check"></i>MITRE ATT&CK</li>
+                                                <li><i class="fas fa-check-circle check"></i>مراحل اختبار الاختراق</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>تثبيت Kali Linux</li>
+                                                <li><i class="fas fa-check-circle check"></i>Nmap (مسح الشبكة)</li>
+                                                <li><i class="fas fa-check-circle check"></i>Wireshark (تحليل الحزم)</li>
+                                                <li><i class="fas fa-check-circle check"></i>Hydra (تخمين كلمات المرور)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag security">Kali</span>
+                                        <span class="topic-tag security">Nmap</span>
+                                        <span class="topic-tag security">Wireshark</span>
+                                        <span class="topic-tag security">Hydra</span>
+                                        <span class="topic-tag security">OWASP</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:80%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 9 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week9">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-user-secret"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge danger me-2">الأسبوع 9</span>
+                                            <span class="fw-bold">Advanced Pentesting & Defense</span>
+                                        </div>
+                                        <span class="badge bg-danger rounded-pill">خبير</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week9" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>Metasploit Framework</li>
+                                                <li><i class="fas fa-check-circle check"></i>SQL Injection</li>
+                                                <li><i class="fas fa-check-circle check"></i>XSS (Cross-Site Scripting)</li>
+                                                <li><i class="fas fa-check-circle check"></i>Firewall & IDS/IPS</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>استخدام Metasploit</li>
+                                                <li><i class="fas fa-check-circle check"></i>SQLMap (حقن SQL)</li>
+                                                <li><i class="fas fa-check-circle check"></i>Burp Suite (اختبار تطبيقات)</li>
+                                                <li><i class="fas fa-check-circle check"></i>تكوين جدار حماية</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag security">Metasploit</span>
+                                        <span class="topic-tag security">SQLMap</span>
+                                        <span class="topic-tag security">Burp</span>
+                                        <span class="topic-tag security">Firewall</span>
+                                        <span class="topic-tag security">IDS</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:90%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== الأسبوع 10 ===== -->
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="450">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week10">
+                                    <div class="d-flex align-items-center gap-3 w-100">
+                                        <span class="week-icon"><i class="fas fa-graduation-cap"></i></span>
+                                        <div class="flex-grow-1">
+                                            <span class="week-badge project me-2">الأسبوع 10</span>
+                                            <span class="fw-bold">مشاريع التخرج والمراجعة</span>
+                                        </div>
+                                        <span class="badge bg-project rounded-pill" style="background:#6610f2;color:white;">تخرج</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="week10" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-book text-warning me-2"></i>النظري</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>مراجعة شاملة</li>
+                                                <li><i class="fas fa-check-circle check"></i>تحضير مقابلات العمل</li>
+                                                <li><i class="fas fa-check-circle check"></i>أسئلة CCNA و Security+</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i>العملي</h6>
+                                            <ul class="content-list">
+                                                <li><i class="fas fa-check-circle check"></i>مشروع شركة متكامل</li>
+                                                <li><i class="fas fa-check-circle check"></i>اختبار اختراق شامل</li>
+                                                <li><i class="fas fa-check-circle check"></i>تقديم المشروع النهائي</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-wrap gap-1">
+                                        <span class="topic-tag project">Final Project</span>
+                                        <span class="topic-tag project">Review</span>
+                                        <span class="topic-tag project">Interview Prep</span>
+                                        <span class="topic-tag project">CCNA</span>
+                                        <span class="topic-tag project">Security+</span>
+                                    </div>
+                                    <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>

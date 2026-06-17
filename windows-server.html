@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windows Server - أكاديمية الشبكات والأمن السيبراني</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom Styles -->
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .feature-badge {
+            background: #1a2332;
+            color: #0ea5e9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid #0ea5e9;
+        }
+        .feature-badge.success {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        .feature-badge.warning {
+            border-color: #eab308;
+            color: #eab308;
+        }
+        .feature-badge.danger {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        .gpo-card {
+            border-right: 4px solid #0ea5e9;
+            transition: all 0.3s ease;
+        }
+        .gpo-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        .powershell-code {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            border-right: 4px solid #0ea5e9;
+        }
+        .powershell-code .cmd {
+            color: #fbbf24;
+        }
+        .powershell-code .output {
+            color: #34d399;
+        }
+        .powershell-code .comment {
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    NAVBAR
+    ============================================================ -->
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <!-- ===== الشعار ===== -->
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap text-warning me-2"></i>
+            <span style="font-size:1.2rem;">أكاديمية</span>
+            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+        </a>
+
+        <!-- ===== زر القائمة للجوال ===== -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ===== الروابط ===== -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+            </ul>
+
+            <!-- ===== الأزرار الجانبية ===== -->
+            <div class="d-flex gap-2 align-items-center">
+                <!-- زر المدرب -->
+                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                    <i class="fas fa-user-tie me-1"></i> المدرب
+                </a>
+                <!-- زر تسجيل الدخول -->
+                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                    <i class="fas fa-sign-in-alt me-1"></i> دخول
+                </a>
+                <!-- زر الوضع المظلم -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- ============================================================
+    PAGE HEADER
+    ============================================================ -->
+    <section class="py-5" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); margin-top: 56px;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-white" data-aos="fade-up">
+                    <span class="badge bg-success mb-3 fs-6">🖥️ المسار الثاني</span>
+                    <h1 class="display-4 fw-bold">Windows Server</h1>
+                    <p class="lead opacity-75">
+                        من <span class="text-success">Active Directory</span> إلى <span class="text-success">GPO</span>
+                        و <span class="text-success">PowerShell</span> — إدارة احترافية للبنية التحتية
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="feature-badge"><i class="fas fa-check-circle text-success me-1"></i> AD DS</span>
+                        <span class="feature-badge success"><i class="fas fa-check-circle text-success me-1"></i> DNS</span>
+                        <span class="feature-badge warning"><i class="fas fa-check-circle text-success me-1"></i> DHCP</span>
+                        <span class="feature-badge danger"><i class="fas fa-check-circle text-success me-1"></i> GPO</span>
+                        <span class="feature-badge"><i class="fas fa-check-circle text-success me-1"></i> Hyper-V</span>
+                        <span class="feature-badge success"><i class="fas fa-check-circle text-success me-1"></i> PowerShell</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block" data-aos="fade-left">
+<i class="fab fa-windows" style="font-size:80px;color:#20c997;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 1: ACTIVE DIRECTORY & DOMAIN CONTROLLER
+    ============================================================ -->
+    <section class="py-5" id="ad-ds">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-success mb-2">القلب النابض</span>
+                <h2 class="display-5 fw-bold">👥 Active Directory & Domain Controller</h2>
+                <p class="text-muted">إدارة المستخدمين والأجهزة في المؤسسة</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-users text-success me-2"></i>ما هو Domain Controller؟</h5>
+                            <p class="text-muted">
+                                DC هو الخادم الذي يحتوي على قاعدة بيانات Active Directory. يتحكم في:
+                            </p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check-circle text-success me-2"></i>تسجيل دخول المستخدمين</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>سياسات الأمان (GPO)</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>مصادقة الأجهزة</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>خدمات DNS و DHCP</li>
+                            </ul>
+                            <div class="alert alert-success mt-3">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>نصيحة:</strong> في المؤسسات، يُنصح بوجود DC ثانوي (Backup DC) لتجنب التوقف.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-terminal text-success me-2"></i>خطوات رفع DC</h5>
+                            <ol class="small text-muted">
+                                <li class="mb-2">تثبيت Windows Server</li>
+                                <li class="mb-2">تثبيت دور <strong>Active Directory Domain Services</strong></li>
+                                <li class="mb-2">تشغيل معالج <strong>Active Directory Domain Services Configuration</strong></li>
+                                <li class="mb-2">اختيار <strong>Add a new forest</strong> (مثال: company.local)</li>
+                                <li class="mb-2">تعيين كلمة مرور DSRM</li>
+                                <li class="mb-2">إعادة التشغيل</li>
+                            </ol>
+                            <div class="powershell-code">
+                                <span class="comment"># تثبيت AD DS عبر PowerShell</span><br />
+                                <span class="cmd">Install-WindowsFeature</span> -Name AD-Domain-Services -IncludeManagementTools<br />
+                                <span class="cmd">Install-ADDSForest</span> -DomainName <span class="output">"company.local"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 2: DNS & DHCP
+    ============================================================ -->
+    <section class="py-5 bg-light" id="dns-dhcp">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-info text-dark mb-2">الخدمات الأساسية</span>
+                <h2 class="display-5 fw-bold">🌐 DNS & DHCP</h2>
+                <p class="text-muted">حل الأسماء وتوزيع العناوين تلقائياً</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="flip-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-globe text-info me-2"></i>DNS (Domain Name System)</h5>
+                            <p class="small text-muted">
+                                يحول أسماء النطاقات (مثل www.company.local) إلى عناوين IP.
+                            </p>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Forward Lookup Zone:</strong> اسم → IP</li>
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Reverse Lookup Zone:</strong> IP → اسم</li>
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Record Types:</strong> A, CNAME, MX, SRV</li>
+                            </ul>
+                            <div class="powershell-code" style="font-size:0.75rem;">
+                                <span class="comment"># إنشاء سجل A</span><br />
+                                <span class="cmd">Add-DnsServerResourceRecordA</span> -ZoneName <span class="output">"company.local"</span> -Name <span class="output">"mail"</span> -IPv4Address <span class="output">"192.168.1.10"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="flip-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-cloud-upload-alt text-info me-2"></i>DHCP (Dynamic Host Configuration Protocol)</h5>
+                            <p class="small text-muted">
+                                يوزع عناوين IP تلقائياً على الأجهزة عند اتصالها بالشبكة.
+                            </p>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Scope:</strong> نطاق العناوين المتاحة</li>
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Reservation:</strong> تثبيت عنوان IP لجهاز معين</li>
+                                <li><i class="fas fa-check-circle text-info me-2"></i><strong>Lease Time:</strong> مدة استئجار العنوان</li>
+                            </ul>
+                            <div class="powershell-code" style="font-size:0.75rem;">
+                                <span class="comment"># تثبيت DHCP</span><br />
+                                <span class="cmd">Install-WindowsFeature</span> -Name DHCP -IncludeManagementTools<br />
+                                <span class="cmd">Add-DhcpServerv4Scope</span> -Name <span class="output">"LAN"</span> -StartRange <span class="output">"192.168.1.100"</span> -EndRange <span class="output">"192.168.1.200"</span> -SubnetMask <span class="output">"255.255.255.0"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 3: GROUP POLICY (GPO) - الأهم
+    ============================================================ -->
+    <section class="py-5" id="gpo">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">التحكم الكامل</span>
+                <h2 class="display-5 fw-bold">⚙️ Group Policy (GPO)</h2>
+                <p class="text-muted">تطبيق سياسات على المستخدمين والأجهزة دفعة واحدة</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card border-0 shadow-sm h-100 gpo-card">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-3">
+                                <div class="bg-warning text-dark rounded-circle d-inline-flex p-3">
+                                    <i class="fas fa-user-lock fa-2x"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-center fw-bold">سياسات الأمان</h5>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>تعقيد كلمة المرور</li>
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>قفل الحساب بعد 3 محاولات</li>
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>تغيير كلمة المرور كل 30 يوماً</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100 gpo-card" style="border-right-color:#22c55e;">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-3">
+                                <div class="bg-success text-white rounded-circle d-inline-flex p-3">
+                                    <i class="fas fa-desktop fa-2x"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-center fw-bold">تخصيص سطح المكتب</h5>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-success me-2"></i>تثبيت خلفية موحدة</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>إخفاء أيقونات معينة</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>تعيين شاشة توقف</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100 gpo-card" style="border-right-color:#ef4444;">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-3">
+                                <div class="bg-danger text-white rounded-circle d-inline-flex p-3">
+                                    <i class="fas fa-ban fa-2x"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-center fw-bold">القيود</h5>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>منع تشغيل الـ USB</li>
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>منع تثبيت البرامج</li>
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>منع الوصول إلى لوحة التحكم</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GPO Commands -->
+            <div class="mt-4" data-aos="fade-up">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-bold"><i class="fas fa-terminal text-warning me-2"></i>أوامر GPO الشائعة</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="powershell-code" style="font-size:0.75rem;">
+                                    <span class="comment"># تحديث GPO يدوياً</span><br />
+                                    <span class="cmd">gpupdate</span> /force<br /><br />
+                                    <span class="comment"># معرفة GPO المطبقة</span><br />
+                                    <span class="cmd">gpresult</span> /r
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="powershell-code" style="font-size:0.75rem;">
+                                    <span class="comment"># Backup GPO</span><br />
+                                    <span class="cmd">Backup-GPO</span> -Name <span class="output">"Security Policy"</span> -Path <span class="output">"C:\GPOBackup"</span><br /><br />
+                                    <span class="comment"># Restore GPO</span><br />
+                                    <span class="cmd">Restore-GPO</span> -BackupId <span class="output">"{GUID}"</span> -TargetName <span class="output">"Restored Policy"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 4: FILE & PRINT SERVER
+    ============================================================ -->
+    <section class="py-5 bg-light" id="file-print">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary mb-2">المشاركة والطباعة</span>
+                <h2 class="display-5 fw-bold">📁 File & Print Server</h2>
+                <p class="text-muted">مشاركة الملفات والطابعات في المؤسسة</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-folder-open text-primary me-2"></i>File Server</h5>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-primary me-2"></i><strong>NTFS Permissions:</strong> صلاحيات على مستوى الملفات والمجلدات</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i><strong>Share Permissions:</strong> صلاحيات على مستوى المشاركة</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i><strong>DFS (Distributed File System):</strong> توحيد مجلدات متعددة</li>
+                            </ul>
+                            <div class="powershell-code" style="font-size:0.75rem;">
+                                <span class="comment"># إنشاء مشاركة مجلد</span><br />
+                                <span class="cmd">New-SmbShare</span> -Name <span class="output">"SharedData"</span> -Path <span class="output">"C:\Data"</span> -FullAccess <span class="output">"DOMAIN\Admins"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-print text-primary me-2"></i>Print Server</h5>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>إدارة الطابعات من مكان واحد</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>توزيع برامج التشغيل تلقائياً</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>مراقبة استخدام الطابعات</li>
+                            </ul>
+                            <div class="powershell-code" style="font-size:0.75rem;">
+                                <span class="comment"># تثبيت Print Server</span><br />
+                                <span class="cmd">Install-WindowsFeature</span> -Name Print-Services -IncludeManagementTools<br /><br />
+                                <span class="comment"># مشاركة طابعة</span><br />
+                                <span class="cmd">Add-Printer</span> -Name <span class="output">"HP-LaserJet"</span> -ShareName <span class="output">"HP-Print"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 5: HYPER-V
+    ============================================================ -->
+    <section class="py-5" id="hyperv">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-secondary mb-2">المحاكاة الافتراضية</span>
+                <h2 class="display-5 fw-bold">🖥️ Hyper-V</h2>
+                <p class="text-muted">إنشاء وإدارة الأجهزة الافتراضية على Windows Server</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-up">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-cube fa-3x text-secondary mb-3"></i>
+                            <h5 class="fw-bold">Virtual Machines</h5>
+                            <p class="small text-muted">تشغيل أنظمة تشغيل متعددة على خادم واحد.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-copy fa-3x text-secondary mb-3"></i>
+                            <h5 class="fw-bold">Checkpoints</h5>
+                            <p class="small text-muted">إنشاء نقاط استعادة قبل إجراء تغييرات كبيرة.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-arrows-rotate fa-3x text-secondary mb-3"></i>
+                            <h5 class="fw-bold">Live Migration</h5>
+                            <p class="small text-muted">نقل الأجهزة الافتراضية بين الخوادم دون توقف.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4" data-aos="fade-up">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-bold"><i class="fas fa-terminal text-secondary me-2"></i>أوامر Hyper-V في PowerShell</h5>
+                        <div class="powershell-code" style="font-size:0.75rem;">
+                            <span class="comment"># إنشاء VM</span><br />
+                            <span class="cmd">New-VM</span> -Name <span class="output">"Windows-Client"</span> -MemoryStartupBytes 4GB -BootDevice VHD -VHDPath <span class="output">"C:\VMs\client.vhdx"</span> -Path <span class="output">"C:\VMs"</span> -Generation 2<br /><br />
+                            <span class="comment"># تشغيل VM</span><br />
+                            <span class="cmd">Start-VM</span> -Name <span class="output">"Windows-Client"</span><br /><br />
+                            <span class="comment"># إيقاف VM</span><br />
+                            <span class="cmd">Stop-VM</span> -Name <span class="output">"Windows-Client"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECTION 6: LABS (مختبرات ويندوز سيرفر)
+    ============================================================ -->
+    <section class="py-5 bg-light" id="labs">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-success mb-2">مختبرات</span>
+                <h2 class="display-5 fw-bold">🧪 مختبرات Windows Server</h2>
+                <p class="text-muted">طبق عملياً كل ما تعلمته</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-up">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Lab 1</span>
+                            <h5 class="fw-bold">رفع Domain Controller</h5>
+                            <p class="small text-muted">تثبيت AD DS وإنشاء Forest جديد، وإضافة مستخدمين.</p>
+                            <a href="#" class="btn btn-sm btn-outline-success">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-info text-dark mb-2">Lab 2</span>
+                            <h5 class="fw-bold">DNS & DHCP</h5>
+                            <p class="small text-muted">تثبيت وتكوين DNS و DHCP، وإنشاء سجلات ونطاقات.</p>
+                            <a href="#" class="btn btn-sm btn-outline-info">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <span class="badge bg-warning text-dark mb-2">Lab 3</span>
+                            <h5 class="fw-bold">Group Policy (GPO)</h5>
+                            <p class="small text-muted">إنشاء سياسة أمان وتطبيقها على مجموعة مستخدمين.</p>
+                            <a href="#" class="btn btn-sm btn-outline-warning">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out',
+        });
+    </script>
+</body>
+</html>

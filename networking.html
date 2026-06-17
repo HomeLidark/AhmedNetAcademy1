@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الشبكات العملية - أكاديمية أحمد الحداد</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        /* ===== ROOT ===== */
+        :root {
+            --primary: #0d6efd;
+            --primary-dark: #0a58ca;
+            --secondary: #6610f2;
+            --success: #20c997;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --gold: #ffc107;
+            --dark: #0f172a;
+            --darker: #080c16;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --shadow-gold: 0 8px 30px rgba(255, 193, 7, 0.2);
+            --radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            padding-top: 70px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
+        /* ===== SELECTION ===== */
+        ::selection { background: var(--gold); color: var(--dark); }
+
+        /* ===== NAVBAR ===== */
+        #mainNav {
+            background: rgba(10, 15, 26, 0.97) !important;
+            backdrop-filter: blur(16px);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.12);
+            box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+            padding: 10px 0;
+        }
+        #mainNav .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem !important;
+            color: var(--text-primary) !important;
+            transition: var(--transition);
+        }
+        #mainNav .navbar-brand:hover { transform: scale(1.02); }
+        #mainNav .navbar-brand .text-warning { color: var(--gold) !important; text-shadow: 0 0 30px rgba(255,193,7,0.15); }
+        #mainNav .navbar-brand i { font-size: 1.8rem; background: linear-gradient(135deg, var(--gold), #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #mainNav .nav-link {
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem !important;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: rgba(255,255,255,0.7) !important;
+            position: relative;
+        }
+        #mainNav .nav-link:hover, #mainNav .nav-link.active {
+            color: var(--gold) !important;
+            background: rgba(255,193,7,0.08);
+            transform: translateY(-2px);
+        }
+        #mainNav .nav-link.active { background: rgba(255,193,7,0.12); }
+        #mainNav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            right: 30%;
+            width: 40%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), #f59e0b);
+            border-radius: 10px;
+        }
+        #mainNav .btn-warning {
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            border: none;
+            color: var(--dark) !important;
+            font-weight: 700;
+            padding: 8px 20px !important;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-gold);
+        }
+        #mainNav .btn-warning:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 30px rgba(255,193,7,0.4); }
+        #mainNav .btn-outline-light {
+            border: 1.5px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8) !important;
+            padding: 8px 18px !important;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+        #mainNav .btn-outline-light:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--gold);
+            color: var(--gold) !important;
+            transform: translateY(-2px);
+        }
+        #mainNav .btn-outline-secondary {
+            border: 1.5px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5) !important;
+            padding: 8px 14px !important;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+        #mainNav .btn-outline-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--gold);
+            color: var(--gold) !important;
+            transform: translateY(-2px);
+        }
+        .navbar-toggler {
+            border: 1.5px solid rgba(255,255,255,0.15);
+            padding: 8px 12px;
+            border-radius: 12px;
+        }
+        .navbar-toggler:focus { box-shadow: 0 0 0 4px rgba(255,193,7,0.15); }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1a0a2a 40%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255,193,7,0.06);
+        }
+        .page-header::before {
+            content: '🌐';
+            position: absolute;
+            font-size: 25rem;
+            opacity: 0.04;
+            bottom: -80px;
+            left: -80px;
+            transform: rotate(-10deg);
+        }
+        .page-header .badge { font-size: 1rem !important; padding: 10px 24px !important; border-radius: 50px !important; }
+        .page-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        .protocol-badge {
+            font-family: 'Courier New', monospace;
+            background: rgba(255,255,255,0.04);
+            color: #0ea5e9;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(14,165,233,0.2);
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .protocol-badge:hover {
+            border-color: #0ea5e9;
+            background: rgba(14,165,233,0.08);
+            transform: translateY(-2px);
+        }
+
+        /* ===== HERO ICON ===== */
+        .hero-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-icon-wrapper .icon-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,193,7,0.08), rgba(13,110,253,0.08));
+            border: 2px solid rgba(255,193,7,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #0ea5e9;
+            transition: var(--transition);
+            box-shadow: 0 0 60px rgba(13,110,253,0.05);
+        }
+        .hero-icon-wrapper .icon-circle:hover {
+            transform: scale(1.05);
+            border-color: rgba(255,193,7,0.4);
+            box-shadow: 0 0 80px rgba(255,193,7,0.08);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: rgba(255,255,255,0.03) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius) !important;
+            padding: 30px;
+            transition: var(--transition);
+            color: var(--text-primary) !important;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,193,7,0.2) !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
+            background: rgba(255,255,255,0.05) !important;
+        }
+        .card .card-title { color: var(--text-primary) !important; font-weight: 700; }
+        .card .card-text, .card .text-muted { color: var(--text-secondary) !important; }
+
+        /* ===== TOPIC CARD ===== */
+        .topic-card {
+            border-right: 4px solid transparent;
+            transition: var(--transition);
+        }
+        .topic-card:hover {
+            border-right-color: var(--gold) !important;
+            transform: translateX(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+        }
+        .topic-card .code-block {
+            font-size: 0.75rem;
+        }
+
+        /* ===== CODE BLOCK ===== */
+        .code-block {
+            background: var(--darker) !important;
+            border: 1px solid var(--border-color);
+            border-right: 4px solid #0ea5e9 !important;
+            border-radius: 12px;
+            padding: 20px 24px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            line-height: 1.9;
+        }
+        .code-block .comment { color: var(--text-muted); font-style: italic; }
+        .code-block .keyword { color: #f472b6; }
+        .code-block .string { color: #34d399; }
+        .code-block .number { color: #fbbf24; }
+        .code-block .prompt { color: #fbbf24; }
+        .code-block .output { color: #94a3b8; }
+
+        /* ===== SUBNET CALCULATOR ===== */
+        .subnet-calculator {
+            background: linear-gradient(135deg, #0a0f1a, #1a2332);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .subnet-calculator .result-box {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: var(--transition);
+        }
+        .subnet-calculator .result-box:hover {
+            border-color: rgba(255,193,7,0.2);
+        }
+        .subnet-calculator .form-control, .subnet-calculator .form-select {
+            background: rgba(255,255,255,0.04) !important;
+            border: 2px solid rgba(255,255,255,0.06) !important;
+            border-radius: 12px !important;
+            padding: 14px 18px !important;
+            color: var(--text-primary) !important;
+            transition: var(--transition);
+        }
+        .subnet-calculator .form-control:focus, .subnet-calculator .form-select:focus {
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 4px rgba(255,193,7,0.06) !important;
+            background: rgba(255,255,255,0.06) !important;
+        }
+
+        /* ===== TABLE ===== */
+        .table {
+            color: var(--text-secondary) !important;
+        }
+        .table th {
+            background: rgba(255,255,255,0.04) !important;
+            color: var(--text-primary) !important;
+            font-weight: 700;
+            border-color: var(--border-color) !important;
+            padding: 14px 20px !important;
+        }
+        .table td {
+            border-color: var(--border-color) !important;
+            padding: 12px 20px !important;
+            vertical-align: middle;
+        }
+        .table-hover tbody tr:hover {
+            background: rgba(255,255,255,0.02) !important;
+        }
+        .table .badge { font-size: 0.8rem; padding: 4px 14px; }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-gold);
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTop:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 12px 40px rgba(255,193,7,0.4); }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode {
+            background: var(--darker);
+        }
+        body.dark-mode .card {
+            background: rgba(255,255,255,0.02) !important;
+        }
+        body.dark-mode #mainNav {
+            background: rgba(4,8,16,0.99) !important;
+        }
+        body.dark-mode .subnet-calculator {
+            background: linear-gradient(135deg, #040810, #0a0f1a);
+        }
+        body.dark-mode .page-header {
+            background: linear-gradient(135deg, #040810, #0a0a16, #040810);
+        }
+
+        /* ===== BADGES ===== */
+        .badge.bg-warning { background: var(--gold) !important; color: var(--dark) !important; }
+        .badge.bg-primary { background: var(--primary) !important; }
+        .badge.bg-success { background: var(--success) !important; }
+        .badge.bg-danger { background: var(--danger) !important; }
+        .badge.bg-info { background: #0dcaf0 !important; color: var(--dark) !important; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .page-header { text-align: center; }
+            .hero-icon-wrapper .icon-circle { width: 120px; height: 120px; font-size: 3rem; }
+        }
+        @media (max-width: 768px) {
+            body { font-size: 16px; }
+            .card { padding: 20px; }
+            .code-block { font-size: 0.75rem; padding: 15px; }
+            .subnet-calculator { padding: 20px; }
+            .table th, .table td { padding: 8px 12px !important; font-size: 0.85rem; }
+            #backToTop { width: 45px; height: 45px; font-size: 1.2rem; }
+        }
+        @media (max-width: 576px) {
+            .page-header h1 { font-size: 2rem !important; }
+            .hero-icon-wrapper .icon-circle { width: 90px; height: 90px; font-size: 2.2rem; }
+            .protocol-badge { font-size: 0.7rem; padding: 4px 12px; }
+            #mainNav .navbar-brand { font-size: 1.2rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-graduation-cap text-warning me-2"></i>
+                أكاديمية <span class="text-warning">أحمد الحداد</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="networking.html">🌐 الشبكات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                    <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                    <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+                <div class="d-flex gap-2 align-items-center">
+                    <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3">
+                        <i class="fas fa-user-tie me-1"></i> المدرب
+                    </a>
+                    <a href="login.html" class="btn btn-outline-light btn-sm px-3">
+                        <i class="fas fa-sign-in-alt me-1"></i> دخول
+                    </a>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header py-5" style="margin-top:56px;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-white" data-aos="fade-up">
+                    <span class="badge bg-warning text-dark mb-3 fs-6">📡 المسار الأول</span>
+                    <h1 class="display-4 fw-bold">الشبكات <span class="text-warning">العملية</span></h1>
+                    <p class="lead opacity-75" style="font-size:1.2rem;">
+                        من <span class="text-warning">IP Addressing</span> إلى <span class="text-warning">Routing Protocols</span>
+                        و <span class="text-warning">Cisco Configuration</span> — تدريب عملي 100%
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> OSI</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> TCP/IP</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> Subnetting</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> VLAN</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> OSPF</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> BGP</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> ACL</span>
+                        <span class="protocol-badge"><i class="fas fa-check-circle text-success me-1"></i> NAT</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center" data-aos="fade-left">
+                    <div class="hero-icon-wrapper">
+                        <div class="icon-circle">
+                            <i class="fas fa-server"></i>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3 small">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <br />
+                        <span style="color: var(--text-muted);">Cisco Certified</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 1: IP ADDRESSING & SUBNETTING ===== -->
+    <section class="py-5" id="ip-addressing">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الموضوع الأساسي</span>
+                <h2 class="display-5 fw-bold">📍 IP Addressing & <span class="text-warning">Subnetting</span></h2>
+                <p class="text-muted">فهم عناوين IP وكيفية تقسيم الشبكات يدوياً</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-hashtag text-warning me-2"></i>العنونة IP</h5>
+                            <p class="text-muted">عنوان IP هو المعرف الفريد لكل جهاز في الشبكة. يتكون من 32 بت مقسمة إلى 4 أكتيت (مثل: 192.168.1.1).</p>
+                            <div class="row g-2 mt-3">
+                                <div class="col-6">
+                                    <div class="p-3 rounded-4 text-center" style="background:rgba(255,255,255,0.03);border:1px solid var(--border-color);">
+                                        <small class="text-muted">Class A</small>
+                                        <h6 style="color: var(--text-primary);">1.0.0.0 - 126.255.255.255</h6>
+                                        <span class="badge bg-primary">/8</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 rounded-4 text-center" style="background:rgba(255,255,255,0.03);border:1px solid var(--border-color);">
+                                        <small class="text-muted">Class B</small>
+                                        <h6 style="color: var(--text-primary);">128.0.0.0 - 191.255.255.255</h6>
+                                        <span class="badge bg-primary">/16</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 rounded-4 text-center" style="background:rgba(255,255,255,0.03);border:1px solid var(--border-color);">
+                                        <small class="text-muted">Class C</small>
+                                        <h6 style="color: var(--text-primary);">192.0.0.0 - 223.255.255.255</h6>
+                                        <span class="badge bg-primary">/24</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 rounded-4 text-center" style="background:rgba(255,255,255,0.03);border:1px solid var(--border-color);">
+                                        <small class="text-muted">Private IPs</small>
+                                        <h6 style="color: var(--text-primary);">10.0.0.0, 172.16.0.0, 192.168.0.0</h6>
+                                        <span class="badge bg-success">RFC 1918</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="subnet-calculator h-100">
+                        <h5 class="fw-bold text-white"><i class="fas fa-calculator text-warning me-2"></i>آلة حاسبة Subnetting</h5>
+                        <p class="text-white-50 small">أدخل عنوان IP والـ Subnet Mask واحسب التفاصيل</p>
+
+                        <div class="mb-3">
+                            <label class="text-white-50 small">عنوان IP</label>
+                            <input type="text" id="ipInput" class="form-control" value="192.168.1.0" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-white-50 small">Subnet Mask</label>
+                            <select id="maskSelect" class="form-select">
+                                <option value="24">/24 (255.255.255.0)</option>
+                                <option value="25">/25 (255.255.255.128)</option>
+                                <option value="26">/26 (255.255.255.192)</option>
+                                <option value="27">/27 (255.255.255.224)</option>
+                                <option value="28" selected>/28 (255.255.255.240)</option>
+                                <option value="29">/29 (255.255.255.248)</option>
+                                <option value="30">/30 (255.255.255.252)</option>
+                            </select>
+                        </div>
+                        <button onclick="calculateSubnet()" class="btn btn-warning w-100 mb-3 fw-bold text-dark">
+                            <i class="fas fa-play me-2"></i>احسب
+                        </button>
+
+                        <div id="subnetResults" class="row g-2">
+                            <div class="col-6">
+                                <div class="result-box text-center">
+                                    <small class="text-white-50">Network</small>
+                                    <h6 class="text-warning" id="networkAddr">192.168.1.0</h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="result-box text-center">
+                                    <small class="text-white-50">Broadcast</small>
+                                    <h6 class="text-warning" id="broadcastAddr">192.168.1.15</h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="result-box text-center">
+                                    <small class="text-white-50">First Host</small>
+                                    <h6 class="text-success" id="firstHost">192.168.1.1</h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="result-box text-center">
+                                    <small class="text-white-50">Last Host</small>
+                                    <h6 class="text-danger" id="lastHost">192.168.1.14</h6>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="result-box text-center">
+                                    <small class="text-white-50">Total Usable Hosts</small>
+                                    <h6 class="text-info" id="totalHosts">14</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5" data-aos="fade-up">
+                <h5 class="fw-bold"><i class="fas fa-terminal text-warning me-2"></i>تطبيق Cisco CLI</h5>
+                <div class="code-block">
+                    <span class="comment">! تكوين IP على واجهة Router</span><br />
+                    <span class="prompt">Router&gt;</span> <span class="keyword">enable</span><br />
+                    <span class="prompt">Router#</span> <span class="keyword">configure terminal</span><br />
+                    <span class="prompt">Router(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/0<br />
+                    <span class="prompt">Router(config-if)#</span> <span class="keyword">ip address</span> <span class="string">192.168.1.1</span> <span class="number">255.255.255.0</span><br />
+                    <span class="prompt">Router(config-if)#</span> <span class="keyword">no shutdown</span><br />
+                    <span class="prompt">Router(config-if)#</span> <span class="keyword">exit</span><br />
+                    <span class="prompt">Router(config)#</span> <span class="keyword">ip route</span> <span class="string">0.0.0.0</span> <span class="number">0.0.0.0</span> <span class="string">192.168.1.254</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: SWITCHING & VLAN ===== -->
+    <section class="py-5" style="background:rgba(255,255,255,0.02);" id="switching">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الجزء العملي</span>
+                <h2 class="display-5 fw-bold">🔀 Switching & <span class="text-warning">VLAN</span></h2>
+                <p class="text-muted">تقسيم الشبكة إلى شبكات افتراضية وعزل الحركة</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="flip-right">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-diagram-project text-warning me-2"></i>VLAN Configuration</h5>
+                            <div class="code-block" style="font-size:0.8rem;">
+                                <span class="comment">! إنشاء VLAN على سويتش Cisco</span><br />
+                                <span class="prompt">Switch#</span> <span class="keyword">vlan database</span><br />
+                                <span class="prompt">Switch(vlan)#</span> <span class="keyword">vlan</span> <span class="number">10</span> <span class="string">name</span> Sales<br />
+                                <span class="prompt">Switch(vlan)#</span> <span class="keyword">vlan</span> <span class="number">20</span> <span class="string">name</span> Engineering<br />
+                                <span class="prompt">Switch(vlan)#</span> <span class="keyword">exit</span><br /><br />
+                                <span class="comment">! تعيين بورت لـ VLAN</span><br />
+                                <span class="prompt">Switch#</span> <span class="keyword">configure terminal</span><br />
+                                <span class="prompt">Switch(config)#</span> <span class="keyword">interface</span> fastEthernet 0/1<br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">switchport mode</span> access<br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">switchport access</span> <span class="keyword">vlan</span> <span class="number">10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="flip-left">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-link text-warning me-2"></i>Trunk & Inter-VLAN</h5>
+                            <div class="code-block" style="font-size:0.8rem;">
+                                <span class="comment">! تكوين Trunk بين سويتشين</span><br />
+                                <span class="prompt">Switch(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/1<br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">switchport mode</span> trunk<br />
+                                <span class="prompt">Switch(config-if)#</span> <span class="keyword">switchport trunk allowed</span> <span class="keyword">vlan</span> <span class="number">10,20</span><br /><br />
+                                <span class="comment">! Inter-VLAN Routing (Router-on-a-stick)</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/0.<span class="number">10</span><br />
+                                <span class="prompt">Router(config-subif)#</span> <span class="keyword">encapsulation dot1Q</span> <span class="number">10</span><br />
+                                <span class="prompt">Router(config-subif)#</span> <span class="keyword">ip address</span> <span class="string">192.168.10.1</span> <span class="number">255.255.255.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: ROUTING PROTOCOLS ===== -->
+    <section class="py-5" id="routing">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">بروتوكولات التوجيه</span>
+                <h2 class="display-5 fw-bold">🗺️ <span class="text-warning">Routing</span> Protocols</h2>
+                <p class="text-muted">كيف تتعلم الشبكات عن بعضها وتجد أفضل مسار</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card topic-card h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-route fa-2x"></i>
+                            </div>
+                            <h5 class="fw-bold">OSPF</h5>
+                            <p class="small text-muted">Open Shortest Path First</p>
+                            <ul class="list-unstyled text-start small">
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>بروتوكول Link-State</li>
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>يحسب أقصر مسار باستخدام Dijkstra</li>
+                                <li><i class="fas fa-check-circle text-warning me-2"></i>يدعم VLSM و CIDR</li>
+                            </ul>
+                            <div class="code-block" style="font-size:0.7rem;">
+                                <span class="prompt">Router(config)#</span> <span class="keyword">router ospf</span> <span class="number">1</span><br />
+                                <span class="prompt">Router(config-router)#</span> <span class="keyword">network</span> <span class="string">192.168.1.0</span> <span class="number">0.0.0.255</span> <span class="keyword">area</span> <span class="number">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card topic-card h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="bg-success text-white rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-code-branch fa-2x"></i>
+                            </div>
+                            <h5 class="fw-bold">EIGRP</h5>
+                            <p class="small text-muted">Enhanced Interior Gateway Routing Protocol</p>
+                            <ul class="list-unstyled text-start small">
+                                <li><i class="fas fa-check-circle text-success me-2"></i>بروتوكول Hybrid</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>يحسب أفضل مسار باستخدام DUAL</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i>سريع التقارب</li>
+                            </ul>
+                            <div class="code-block" style="font-size:0.7rem;">
+                                <span class="prompt">Router(config)#</span> <span class="keyword">router eigrp</span> <span class="number">100</span><br />
+                                <span class="prompt">Router(config-router)#</span> <span class="keyword">network</span> <span class="string">192.168.1.0</span> <span class="number">0.0.0.255</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card topic-card h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="bg-danger text-white rounded-circle d-inline-flex p-3 mb-3">
+                                <i class="fas fa-globe fa-2x"></i>
+                            </div>
+                            <h5 class="fw-bold">BGP</h5>
+                            <p class="small text-muted">Border Gateway Protocol</p>
+                            <ul class="list-unstyled text-start small">
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>بروتوكول EGP</li>
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>يستخدم بين الـ ISPs</li>
+                                <li><i class="fas fa-check-circle text-danger me-2"></i>يعتمد على الـ Path Attributes</li>
+                            </ul>
+                            <div class="code-block" style="font-size:0.7rem;">
+                                <span class="prompt">Router(config)#</span> <span class="keyword">router bgp</span> <span class="number">65001</span><br />
+                                <span class="prompt">Router(config-router)#</span> <span class="keyword">neighbor</span> <span class="string">192.168.1.2</span> <span class="keyword">remote-as</span> <span class="number">65002</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: PORTS & PROTOCOLS ===== -->
+    <section class="py-5" style="background:rgba(255,255,255,0.02);" id="ports">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">مهم جداً</span>
+                <h2 class="display-5 fw-bold">🔌 البورتات <span class="text-warning">والبروتوكولات</span></h2>
+                <p class="text-muted">أشهر البورتات المستخدمة في الشبكات</p>
+            </div>
+
+            <div class="table-responsive" data-aos="fade-up">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>البروتوكول</th>
+                            <th>البورت</th>
+                            <th>النوع</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>HTTP</td><td><span class="badge bg-primary">80</span></td><td>TCP</td><td>تصفح الويب غير المشفر</td></tr>
+                        <tr><td>HTTPS</td><td><span class="badge bg-success">443</span></td><td>TCP</td><td>تصفح الويب المشفر</td></tr>
+                        <tr><td>FTP</td><td><span class="badge bg-warning text-dark">20,21</span></td><td>TCP</td><td>نقل الملفات</td></tr>
+                        <tr><td>SSH</td><td><span class="badge bg-danger">22</span></td><td>TCP</td><td>اتصال آمن عن بعد</td></tr>
+                        <tr><td>Telnet</td><td><span class="badge bg-secondary">23</span></td><td>TCP</td><td>اتصال عن بعد (غير آمن)</td></tr>
+                        <tr><td>SMTP</td><td><span class="badge bg-info">25</span></td><td>TCP</td><td>إرسال البريد الإلكتروني</td></tr>
+                        <tr><td>DNS</td><td><span class="badge bg-primary">53</span></td><td>UDP/TCP</td><td>حل الأسماء إلى عناوين</td></tr>
+                        <tr><td>DHCP</td><td><span class="badge bg-success">67,68</span></td><td>UDP</td><td>توزيع عناوين IP تلقائياً</td></tr>
+                        <tr><td>SNMP</td><td><span class="badge bg-warning text-dark">161,162</span></td><td>UDP</td><td>مراقبة وإدارة الشبكات</td></tr>
+                        <tr><td>RDP</td><td><span class="badge bg-danger">3389</span></td><td>TCP</td><td>سطح المكتب البعيد</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 5: ACL & NAT ===== -->
+    <section class="py-5" id="security">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">الأمن في الشبكات</span>
+                <h2 class="display-5 fw-bold">🛡️ ACL & <span class="text-warning">NAT</span></h2>
+                <p class="text-muted">التحكم في حركة البيانات وترجمة العناوين</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-filter text-warning me-2"></i>ACL (Access Control List)</h5>
+                            <p class="small text-muted">تُستخدم لمنع أو السماح بحركة البيانات بناءً على IP أو بورت معين.</p>
+                            <div class="code-block" style="font-size:0.8rem;">
+                                <span class="comment">! منع أي جهاز من الوصول إلى الشبكة الداخلية</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">access-list</span> <span class="number">100</span> <span class="keyword">deny ip</span> <span class="string">192.168.1.0</span> <span class="number">0.0.0.255</span> <span class="string">10.0.0.0</span> <span class="number">0.0.0.255</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">access-list</span> <span class="number">100</span> <span class="keyword">permit ip</span> <span class="keyword">any any</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/0<br />
+                                <span class="prompt">Router(config-if)#</span> <span class="keyword">ip access-group</span> <span class="number">100</span> <span class="keyword">in</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold"><i class="fas fa-arrows-rotate text-warning me-2"></i>NAT (Network Address Translation)</h5>
+                            <p class="small text-muted">تسمح لأجهزة الشبكة الداخلية بالاتصال بالإنترنت باستخدام عنوان IP عام واحد.</p>
+                            <div class="code-block" style="font-size:0.8rem;">
+                                <span class="comment">! تكوين PAT (Port Address Translation)</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">ip nat inside source list</span> <span class="number">1</span> <span class="keyword">interface</span> gigabitEthernet 0/1 <span class="keyword">overload</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">access-list</span> <span class="number">1</span> <span class="keyword">permit</span> <span class="string">192.168.1.0</span> <span class="number">0.0.0.255</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/0<br />
+                                <span class="prompt">Router(config-if)#</span> <span class="keyword">ip nat inside</span><br />
+                                <span class="prompt">Router(config)#</span> <span class="keyword">interface</span> gigabitEthernet 0/1<br />
+                                <span class="prompt">Router(config-if)#</span> <span class="keyword">ip nat outside</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 6: LABS ===== -->
+    <section class="py-5" style="background:rgba(255,255,255,0.02);" id="labs">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-warning text-dark mb-2">مختبرات الشبكات</span>
+                <h2 class="display-5 fw-bold">🧪 <span class="text-warning">مختبرات</span> عملية</h2>
+                <p class="text-muted">طبق كل ما تعلمته على أجهزة Cisco</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;border-radius:20px 20px 0 0;" />
+                        <div class="card-body">
+                            <span class="badge bg-warning text-dark mb-2">Lab 1</span>
+                            <h5 class="fw-bold">Subnetting & IP Configuration</h5>
+                            <p class="small text-muted">تقسيم شبكة 192.168.10.0/24 إلى 4 شبكات فرعية وتوزيع العناوين على أجهزة الكمبيوتر.</p>
+                            <a href="#" class="btn btn-sm btn-outline-warning">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;border-radius:20px 20px 0 0;" />
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Lab 2</span>
+                            <h5 class="fw-bold">VLAN & Trunk Configuration</h5>
+                            <p class="small text-muted">إنشاء VLAN 10 و 20 على سويتش، وتكوين Trunk بين سويتشين مع Inter-VLAN Routing.</p>
+                            <a href="#" class="btn btn-sm btn-outline-success">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=200&fit=crop" class="card-img-top" alt="Lab" style="height:180px;object-fit:cover;border-radius:20px 20px 0 0;" />
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">Lab 3</span>
+                            <h5 class="fw-bold">OSPF & EIGRP Routing</h5>
+                            <p class="small text-muted">تكوين OSPF و EIGRP على 3 راوترات، ودراسة كيفية تبادل جداول التوجيه.</p>
+                            <a href="#" class="btn btn-sm btn-outline-danger">تحميل <i class="fas fa-download me-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-graduation-cap text-warning me-2"></i>
+                        أكاديمية <span class="text-warning">أحمد الحداد</span>
+                    </h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                        <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>الشهادات</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.
+                <br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script>
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ===== SUBNET CALCULATOR =====
+        function calculateSubnet() {
+            const ip = document.getElementById('ipInput').value;
+            const mask = parseInt(document.getElementById('maskSelect').value);
+
+            const octets = ip.split('.').map(Number);
+            const ipBinary = octets.map(o => o.toString(2).padStart(8, '0')).join('');
+
+            const networkBinary = ipBinary.slice(0, mask) + '0'.repeat(32 - mask);
+            const networkOctets = networkBinary.match(/.{8}/g).map(b => parseInt(b, 2));
+            const networkAddr = networkOctets.join('.');
+
+            const broadcastBinary = ipBinary.slice(0, mask) + '1'.repeat(32 - mask);
+            const broadcastOctets = broadcastBinary.match(/.{8}/g).map(b => parseInt(b, 2));
+            const broadcastAddr = broadcastOctets.join('.');
+
+            const firstOctets = [...networkOctets];
+            firstOctets[3] += 1;
+            const firstHost = firstOctets.join('.');
+
+            const lastOctets = [...broadcastOctets];
+            lastOctets[3] -= 1;
+            const lastHost = lastOctets.join('.');
+
+            const totalHosts = Math.pow(2, 32 - mask) - 2;
+
+            document.getElementById('networkAddr').textContent = networkAddr;
+            document.getElementById('broadcastAddr').textContent = broadcastAddr;
+            document.getElementById('firstHost').textContent = firstHost;
+            document.getElementById('lastHost').textContent = lastHost;
+            document.getElementById('totalHosts').textContent = totalHosts;
+        }
+
+        document.addEventListener('DOMContentLoaded', calculateSubnet);
+        document.getElementById('ipInput').addEventListener('input', calculateSubnet);
+        document.getElementById('maskSelect').addEventListener('change', calculateSubnet);
+
+        // ===== DARK MODE =====
+        const darkToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // ===== AOS =====
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+    </script>
+</body>
+</html>
