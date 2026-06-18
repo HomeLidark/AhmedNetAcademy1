@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,21 +19,53 @@
             --dark: #0f172a;
             --gold: #ffc107;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Cairo', 'Poppins', sans-serif; padding-top: 70px; overflow-x: hidden; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
 
         /* ===== NAVBAR ===== */
         #mainNav {
             background: rgba(15, 23, 42, 0.95) !important;
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
             border-bottom: 2px solid rgba(255, 193, 7, 0.1);
         }
-        #mainNav .navbar-brand { font-size: 1.4rem; font-weight: 700; }
-        #mainNav .navbar-brand .text-warning { color: #ffc107 !important; }
-        #mainNav .nav-link { font-weight: 500; font-size: 0.9rem; padding: 0.5rem 1rem !important; border-radius: 8px; transition: all 0.3s; }
-        #mainNav .nav-link:hover, #mainNav .nav-link.active { color: #ffc107 !important; background: rgba(255, 193, 7, 0.1); }
+
+        #mainNav .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        #mainNav .navbar-brand .text-warning {
+            color: #ffc107 !important;
+        }
+
+        #mainNav .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        #mainNav .nav-link:hover,
+        #mainNav .nav-link.active {
+            color: #ffc107 !important;
+            background: rgba(255, 193, 7, 0.1);
+        }
 
         /* ===== INSTRUCTOR HERO ===== */
         .instructor-hero {
@@ -40,6 +73,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .instructor-hero::before {
             content: '👨‍💻';
             position: absolute;
@@ -49,10 +83,12 @@
             left: -50px;
             transform: rotate(-10deg);
         }
+
         .profile-image-wrapper {
             position: relative;
             display: inline-block;
         }
+
         .profile-image-wrapper::after {
             content: '';
             position: absolute;
@@ -64,6 +100,7 @@
             -webkit-mask-composite: xor;
             mask-composite: exclude;
         }
+
         .profile-image {
             width: 200px;
             height: 200px;
@@ -81,34 +118,77 @@
             font-weight: 600;
             margin: 3px;
         }
-        .badge-skill.network { background: #0d6efd20; color: #0d6efd; border: 1px solid #0d6efd; }
-        .badge-skill.windows { background: #20c99720; color: #20c997; border: 1px solid #20c997; }
-        .badge-skill.linux { background: #ffc10720; color: #856404; border: 1px solid #ffc107; }
-        .badge-skill.security { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
-        .badge-skill.cloud { background: #6610f220; color: #6610f2; border: 1px solid #6610f2; }
-        .badge-skill.database { background: #0ea5e920; color: #0ea5e9; border: 1px solid #0ea5e9; }
-        .badge-skill.python { background: #f59e0b20; color: #856404; border: 1px solid #f59e0b; }
-        .badge-skill.fortinet { background: #dc354520; color: #dc3545; border: 1px solid #dc3545; }
+
+        .badge-skill.network {
+            background: #0d6efd20;
+            color: #0d6efd;
+            border: 1px solid #0d6efd;
+        }
+
+        .badge-skill.windows {
+            background: #20c99720;
+            color: #20c997;
+            border: 1px solid #20c997;
+        }
+
+        .badge-skill.linux {
+            background: #ffc10720;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+
+        .badge-skill.security {
+            background: #dc354520;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .badge-skill.cloud {
+            background: #6610f220;
+            color: #6610f2;
+            border: 1px solid #6610f2;
+        }
+
+        .badge-skill.database {
+            background: #0ea5e920;
+            color: #0ea5e9;
+            border: 1px solid #0ea5e9;
+        }
+
+        .badge-skill.python {
+            background: #f59e0b20;
+            color: #856404;
+            border: 1px solid #f59e0b;
+        }
+
+        .badge-skill.fortinet {
+            background: #dc354520;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
 
         /* ===== STAT BOX ===== */
         .stat-box {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
         }
+
         .stat-box:hover {
             transform: translateY(-5px);
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
         }
+
         .stat-box .number {
             font-size: 2.5rem;
             font-weight: 700;
             color: #ffc107;
         }
+
         .stat-box .label {
             color: #94a3b8;
             font-size: 0.9rem;
@@ -121,10 +201,12 @@
             padding-bottom: 30px;
             border-right: 3px solid #ffc107;
         }
+
         .timeline-item:last-child {
             padding-bottom: 0;
             border-right: none;
         }
+
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -136,6 +218,7 @@
             border-radius: 50%;
             border: 3px solid #0f172a;
         }
+
         .timeline-item .year {
             color: #ffc107;
             font-weight: 700;
@@ -150,98 +233,161 @@
             background: white;
             border: 2px solid #e2e8f0;
         }
+
         .cert-card:hover {
             transform: translateY(-5px);
             border-color: #ffc107;
             box-shadow: 0 10px 30px rgba(255, 193, 7, 0.1);
         }
+
         .cert-card .cert-icon {
             font-size: 3rem;
             margin-bottom: 10px;
         }
 
         /* ===== DARK MODE ===== */
-        body.dark-mode { background: #121826; color: #e2e8f0; }
-        body.dark-mode .bg-light { background: #1a2332 !important; }
-        body.dark-mode .card { background: #1e293b !important; color: #e2e8f0 !important; }
-        body.dark-mode .card .text-muted { color: #94a3b8 !important; }
-        body.dark-mode .bg-white { background: #1e293b !important; }
-        body.dark-mode .cert-card { background: #1e293b !important; border-color: #334155; }
-        body.dark-mode .cert-card:hover { border-color: #ffc107; }
-        body.dark-mode #mainNav { background: rgba(10,15,26,0.98) !important; }
-        body.dark-mode .timeline-item::before { border-color: #1e293b; }
+        body.dark-mode {
+            background: #121826;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .bg-light {
+            background: #1a2332 !important;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b !important;
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode .card .text-muted {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-mode .bg-white {
+            background: #1e293b !important;
+        }
+
+        body.dark-mode .cert-card {
+            background: #1e293b !important;
+            border-color: #334155;
+        }
+
+        body.dark-mode .cert-card:hover {
+            border-color: #ffc107;
+        }
+
+        body.dark-mode #mainNav {
+            background: rgba(10, 15, 26, 0.98) !important;
+        }
+
+        body.dark-mode .timeline-item::before {
+            border-color: #1e293b;
+        }
 
         /* ===== BACK TO TOP ===== */
         #backToTop {
-            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
-            z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(20px);
-            transition: all 0.3s; border-radius: 50%;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            border-radius: 50%;
         }
-        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 992px) { .hero-section { min-height: 90vh; text-align: center; } }
+        @media (max-width: 992px) {
+            .hero-section {
+                min-height: 90vh;
+                text-align: center;
+            }
+        }
+
         @media (max-width: 576px) {
-            .hero-section h1 { font-size: 2.2rem; }
-            #backToTop { width: 40px; height: 40px; bottom: 15px; right: 15px; }
-            .profile-image { width: 150px; height: 150px; }
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            #backToTop {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ===== BACK TO TOP ===== -->
     <button id="backToTop" class="btn btn-warning"><i class="fas fa-chevron-up"></i></button>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-        <!-- ===== الشعار ===== -->
-        <a class="navbar-brand fw-bold" href="index.html">
-            <i class="fas fa-graduation-cap text-warning me-2"></i>
-            <span style="font-size:1.2rem;">أكاديمية</span>
-            <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
-        </a>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <!-- ===== الشعار ===== -->
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-graduation-cap text-warning me-2"></i>
+                <span style="font-size:1.2rem;">أكاديمية</span>
+                <span class="text-warning" style="font-size:1.3rem;">أحمد الحداد</span>
+            </a>
 
-        <!-- ===== زر القائمة للجوال ===== -->
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!-- ===== زر القائمة للجوال ===== -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <!-- ===== الروابط ===== -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
-                <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
-                <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
-                <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
-                <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
-                <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
-                <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
-                <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
-                <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
-            </ul>
+            <!-- ===== الروابط ===== -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                    <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                    <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
 
-            <!-- ===== الأزرار الجانبية ===== -->
-            <div class="d-flex gap-2 align-items-center">
-                <!-- زر المدرب -->
-                <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
-                    <i class="fas fa-user-tie me-1"></i> المدرب
-                </a>
-                <!-- زر تسجيل الدخول -->
-                <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
-                    <i class="fas fa-sign-in-alt me-1"></i> دخول
-                </a>
-                <!-- زر الوضع المظلم -->
-                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <!-- ===== الأزرار الجانبية ===== -->
+                <div class="d-flex gap-2 align-items-center">
+                    <!-- زر المدرب -->
+                    <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3" style="border-radius:50px;">
+                        <i class="fas fa-user-tie me-1"></i> المدرب
+                    </a>
+                    <!-- زر تسجيل الدخول -->
+                    <a href="login.html" class="btn btn-outline-light btn-sm px-3" style="border-radius:50px;">
+                        <i class="fas fa-sign-in-alt me-1"></i> دخول
+                    </a>
+                    <!-- زر الوضع المظلم -->
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" style="border-radius:50px;">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- ===== INSTRUCTOR HERO ===== -->
     <section class="instructor-hero py-5" style="margin-top: 56px;">
@@ -282,25 +428,31 @@
             <div class="row g-3">
                 <div class="col-6 col-md-3" data-aos="fade-up">
                     <div class="stat-box">
-                        <div class="number" data-target="8">0</div>
+                        <i style="color: #fd650d;">اكتر من</i>
+
+                        <div class="number" data-target="10">0</div>
                         <div class="label">سنوات خبرة</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
                     <div class="stat-box">
-                        <div class="number" data-target="500">0+</div>
+                        <i style="color: #fd650d;">اكتر من</i>
+
+                        <div class="number" data-target="1000">0+</div>
                         <div class="label">متدرب دربهم</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
                     <div class="stat-box">
-                        <div class="number" data-target="15">0+</div>
+                        <i style="color: #fd650d;">اكتر من</i>
+                        <div class="number" data-target="30 +">0+</div>
                         <div class="label">شهادة احترافية</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
                     <div class="stat-box">
-                        <div class="number" data-target="25">0+</div>
+                        <i style="color: #fd650d;">اكتر من</i>
+                        <div class="number" data-target="50 +">0+</div>
                         <div class="label">مشروع منفذ</div>
                     </div>
                 </div>
@@ -333,7 +485,8 @@
                             <span class="badge-skill network"><i class="fas fa-network-wired me-1"></i>الشبكات</span>
                             <span class="badge-skill windows"><i class="fab fa-windows me-1"></i>Windows Server</span>
                             <span class="badge-skill linux"><i class="fab fa-linux me-1"></i>Linux</span>
-                            <span class="badge-skill security"><i class="fas fa-shield-halved me-1"></i>الأمن السيبراني</span>
+                            <span class="badge-skill security"><i class="fas fa-shield-halved me-1"></i>الأمن
+                                السيبراني</span>
                             <span class="badge-skill cloud"><i class="fas fa-cloud me-1"></i>Cloud Computing</span>
                             <span class="badge-skill database"><i class="fas fa-database me-1"></i>قواعد البيانات</span>
                             <span class="badge-skill python"><i class="fab fa-python me-1"></i>Python</span>
@@ -344,7 +497,8 @@
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4">
-                            <h5 class="fw-bold"><i class="fas fa-address-card text-warning me-2"></i>معلومات التواصل</h5>
+                            <h5 class="fw-bold"><i class="fas fa-address-card text-warning me-2"></i>معلومات التواصل
+                            </h5>
                             <hr />
                             <div class="d-flex gap-3 mb-3">
                                 <i class="fas fa-user text-warning fa-lg"></i>
@@ -376,10 +530,14 @@
                             </div>
                             <hr />
                             <div class="d-flex gap-3 justify-content-center">
-                                <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="btn btn-outline-danger btn-sm"><i class="fab fa-youtube"></i></a>
-                                <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a>
-                                <a href="https://github.com/HomeLidark" target="_blank" class="btn btn-outline-secondary btn-sm"><i class="fab fa-github"></i></a>
-                                <a href="https://x.com/HomeLidark" target="_blank" class="btn btn-outline-info btn-sm"><i class="fab fa-x-twitter"></i></a>
+                                <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank"
+                                    class="btn btn-outline-danger btn-sm"><i class="fab fa-youtube"></i></a>
+                                <a href="https://www.linkedin.com/in/lidark/" target="_blank"
+                                    class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/HomeLidark" target="_blank"
+                                    class="btn btn-outline-secondary btn-sm"><i class="fab fa-github"></i></a>
+                                <a href="https://x.com/HomeLidark" target="_blank"
+                                    class="btn btn-outline-info btn-sm"><i class="fab fa-x-twitter"></i></a>
                             </div>
                         </div>
                     </div>
@@ -537,17 +695,22 @@
                     </h5>
                     <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
                     <div class="d-flex gap-3">
-                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
-                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
-                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank"
+                            class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i
+                                class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i
+                                class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i
+                                class="fab fa-x-twitter fa-lg"></i></a>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <h6>روابط سريعة</h6>
                     <ul class="list-unstyled small">
                         <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
-                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a>
+                        </li>
                         <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
                         <li><a href="labs.html" class="text-white text-decoration-none opacity-75">المختبرات</a></li>
                     </ul>
@@ -555,10 +718,14 @@
                 <div class="col-md-3">
                     <h6>الشهادات</h6>
                     <ul class="list-unstyled small">
-                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a></li>
-                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">Security+</a></li>
-                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a></li>
-                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CCNA</a>
+                        </li>
+                        <li><a href="certifications.html"
+                                class="text-white text-decoration-none opacity-75">Security+</a></li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">CEH</a>
+                        </li>
+                        <li><a href="certifications.html" class="text-white text-decoration-none opacity-75">OSCP</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-3">
@@ -635,4 +802,5 @@
         AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
     </script>
 </body>
+
 </html>
