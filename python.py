@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بايثون - أكاديمية أحمد الحداد</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom Style -->
+    <link href="css/style.css" rel="stylesheet" />
+
+    <style>
+        /* ===== ألوان بايثون ===== */
+        :root {
+            --python-blue: #3776AB;
+            --python-yellow: #FFD43B;
+        }
+        .python-badge {
+            background: rgba(55, 118, 171, 0.15);
+            color: #60a5fa;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(55, 118, 171, 0.2);
+            display: inline-block;
+            margin: 3px;
+        }
+        .python-badge:hover {
+            background: rgba(55, 118, 171, 0.25);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        .code-block {
+            background: #0a0f1a;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            direction: ltr;
+            text-align: left;
+            border-right: 4px solid var(--python-yellow);
+            overflow-x: auto;
+        }
+        .code-block .comment { color: #64748b; }
+        .code-block .keyword { color: #f472b6; }
+        .code-block .string { color: #34d399; }
+        .code-block .number { color: #fbbf24; }
+        .code-block .function { color: #60a5fa; }
+        .code-block .variable { color: #fbbf24; }
+        .card {
+            background: rgba(255,255,255,0.03) !important;
+            border: 1px solid rgba(255,255,255,0.06) !important;
+            border-radius: 20px !important;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(55, 118, 171, 0.3) !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .btn-python {
+            background: var(--python-yellow);
+            color: #0f172a;
+            font-weight: 700;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-python:hover {
+            transform: scale(1.05);
+            background: #f5c800;
+            color: #0f172a;
+        }
+        .hero-icon {
+            font-size: 5rem;
+            color: var(--python-yellow);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .page-header {
+            background: linear-gradient(135deg, #0f172a, #1a2a3a);
+            border-bottom: 1px solid rgba(55, 118, 171, 0.15);
+        }
+        .bg-python-light { background: rgba(55, 118, 171, 0.05); }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-graduation-cap text-warning me-2"></i>
+                أكاديمية <span class="text-warning">أحمد الحداد</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">🏠 الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">📖 عن الأكاديمية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="curriculum.html">📚 المنهج</a></li>
+                    <li class="nav-item"><a class="nav-link" href="networking.html">🌐 الشبكات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="windows-server.html">🖥️ Windows Server</a></li>
+                    <li class="nav-item"><a class="nav-link" href="linux.html">🐧 Linux</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cybersecurity.html">🛡️ الأمن السيبراني</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="python.html">🐍 بايثون</a></li>
+                    <li class="nav-item"><a class="nav-link" href="labs.html">🧪 المختبرات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">💼 المشاريع</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">🏆 الشهادات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">📞 اتصل بنا</a></li>
+                </ul>
+                <div class="d-flex gap-2 align-items-center">
+                    <a href="instructor.html" class="btn btn-warning btn-sm fw-bold px-3">المدرب</a>
+                    <a href="login.html" class="btn btn-outline-light btn-sm px-3">دخول</a>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <section class="page-header py-5" style="margin-top:56px;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-white">
+                    <span class="badge" style="background:#FFD43B;color:#0f172a;padding:10px 20px;">🐍 مسار بايثون</span>
+                    <h1 class="display-4 fw-bold mt-3">Python <span style="color:#FFD43B;">Programming</span></h1>
+                    <p class="lead opacity-75">من الأساسيات إلى الأتمتة والأمن السيبراني</p>
+                    <div class="mt-3">
+                        <span class="python-badge"><i class="fas fa-check-circle text-success me-1"></i> الأساسيات</span>
+                        <span class="python-badge"><i class="fas fa-check-circle text-success me-1"></i> OOP</span>
+                        <span class="python-badge"><i class="fas fa-check-circle text-success me-1"></i> مكتبات</span>
+                        <span class="python-badge"><i class="fas fa-check-circle text-success me-1"></i> أتمتة</span>
+                        <span class="python-badge"><i class="fas fa-check-circle text-success me-1"></i> أمن سيبراني</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <i class="fab fa-python hero-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 1: BASICS ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge" style="background:#FFD43B;color:#0f172a;">الأساسيات</span>
+                <h2 class="display-5 fw-bold mt-2">🐍 أساسيات <span style="color:#FFD43B;">بايثون</span></h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4">
+                        <h5><i class="fas fa-terminal" style="color:#FFD43B;"></i> المتغيرات والأنواع</h5>
+                        <div class="code-block mt-3">
+                            <span class="comment"># متغيرات في بايثون</span><br />
+                            <span class="variable">name</span> = <span class="string">"أحمد"</span><br />
+                            <span class="variable">age</span> = <span class="number">27</span><br />
+                            <span class="variable">is_student</span> = <span class="keyword">True</span><br />
+                            <span class="variable">grades</span> = [<span class="number">95</span>, <span class="number">88</span>, <span class="number">92</span>]<br />
+                            <span class="keyword">print</span>(<span class="keyword">f</span><span class="string">"الاسم: {name}, العمر: {age}"</span>)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4">
+                        <h5><i class="fas fa-code" style="color:#FFD43B;"></i> الدوال (Functions)</h5>
+                        <div class="code-block mt-3">
+                            <span class="comment"># تعريف دالة</span><br />
+                            <span class="keyword">def</span> <span class="function">greet</span>(<span class="variable">name</span>):<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">f</span><span class="string">"مرحباً {name}!"</span><br /><br />
+                            <span class="variable">message</span> = <span class="function">greet</span>(<span class="string">"أحمد"</span>)<br />
+                            <span class="keyword">print</span>(<span class="variable">message</span>)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: LIBRARIES ===== -->
+    <section class="py-5 bg-python-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge" style="background:#FFD43B;color:#0f172a;">المكتبات</span>
+                <h2 class="display-5 fw-bold mt-2">📦 مكتبات <span style="color:#FFD43B;">بايثون</span></h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="fas fa-chart-line" style="font-size:3rem;color:#3776AB;"></i>
+                        <h5 class="fw-bold mt-3">Pandas</h5>
+                        <p class="text-muted">تحليل ومعالجة البيانات</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="fas fa-calculator" style="font-size:3rem;color:#FFD43B;"></i>
+                        <h5 class="fw-bold mt-3">NumPy</h5>
+                        <p class="text-muted">الحسابات العلمية والمصفوفات</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <i class="fas fa-globe" style="font-size:3rem;color:#3776AB;"></i>
+                        <h5 class="fw-bold mt-3">Django</h5>
+                        <p class="text-muted">تطوير تطبيقات الويب</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: AUTOMATION ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge" style="background:#FFD43B;color:#0f172a;">الأتمتة</span>
+                <h2 class="display-5 fw-bold mt-2">⚡ أتمتة <span style="color:#FFD43B;">المهام</span></h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 p-4">
+                        <h5><i class="fas fa-file" style="color:#FFD43B;"></i> معالجة الملفات</h5>
+                        <div class="code-block mt-3">
+                            <span class="comment"># قراءة وكتابة الملفات</span><br />
+                            <span class="keyword">with</span> <span class="keyword">open</span>(<span class="string">"file.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> <span class="variable">f</span>:<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">content</span> = <span class="variable">f</span>.<span class="function">read</span>()<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(<span class="variable">content</span>)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 p-4">
+                        <h5><i class="fas fa-robot" style="color:#FFD43B;"></i> أتمتة البريد</h5>
+                        <div class="code-block mt-3">
+                            <span class="comment"># أتمتة البريد الإلكتروني</span><br />
+                            <span class="keyword">import</span> smtplib<br />
+                            <span class="variable">server</span> = smtplib.<span class="function">SMTP</span>(<span class="string">"smtp.gmail.com"</span>, <span class="number">587</span>)<br />
+                            <span class="variable">server</span>.<span class="function">starttls</span>()<br />
+                            <span class="variable">server</span>.<span class="function">login</span>(<span class="string">"email@gmail.com"</span>, <span class="string">"password"</span>)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold"><i class="fas fa-graduation-cap text-warning me-2"></i>أكاديمية <span class="text-warning">أحمد الحداد</span></h5>
+                    <p class="small opacity-75">دبلوم احترافي في الشبكات، السيرفرات، والأمن السيبراني.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.youtube.com/@Ahmed_AlHaddad" target="_blank" class="text-white opacity-75"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/lidark/" target="_blank" class="text-white opacity-75"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="https://x.com/HomeLidark" target="_blank" class="text-white opacity-75"><i class="fab fa-x-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none opacity-75">الرئيسية</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">عن الأكاديمية</a></li>
+                        <li><a href="curriculum.html" class="text-white text-decoration-none opacity-75">المنهج</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>اتصل بنا</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-envelope me-2"></i>ahmedict71214@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i>00970597514338</li>
+                        <li><i class="fas fa-location-dot me-2"></i>فلسطين</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25" />
+            <div class="text-center opacity-50 small">
+                &copy; 2026 أكاديمية أحمد الحداد. جميع الحقوق محفوظة.<br />
+                <span class="text-warning">✧</span> تصميم وتطوير المهندس أحمد الحداد <span class="text-warning">✧</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <script src="js/main.js">
+    </script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
+        // Dark Mode
+        const darkToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
